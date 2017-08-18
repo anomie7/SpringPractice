@@ -20,7 +20,18 @@ import com.springbook.biz.user.UserVO;
 import com.springbook.biz.user.impl.UserDAO;
 
 public class DispatcherServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
+	private HandlerMapping handlerMapping;
+	private ViewResolver viewResolver;
+	
+	@Override
+	public void init() throws ServletException {
+		handlerMapping = new HandlerMapping();
+		viewResolver = new ViewResolver();
+		viewResolver.setPrefix("./");
+		viewResolver.setSuffix(".jsp");
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -34,101 +45,27 @@ public class DispatcherServlet extends HttpServlet {
 	}
 
 	private void process(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//		1.클라이언트의 요청 path 정보를 추출한다.
 		String url = request.getRequestURI();
 		String path = url.substring(url.lastIndexOf("/"));
 		logger.info("url: " + url + ", path: " + path);
 
-		if (path.equals("/login.do")) {
-			// 1. 사용자 입력 정보 추출.
-			String id = request.getParameter("id");
-			String password = request.getParameter("password");
-
-			// 2. DB 연동 처리
-			UserVO vo = new UserVO();
-			vo.setId(id);
-			vo.setPassword(password);
-
-			UserDAO userDAO = new UserDAO();
-			UserVO user = userDAO.getUser(vo);
-
-			// 3. 화면 네비게이션
-			if (user != null) {
-				response.sendRedirect("getBoardList.do");
-			} else {
-				response.sendRedirect("login.jsp");
-			}
-		} else if (path.equals("/logout.do")) {
-			HttpSession session = request.getSession();
-			session.invalidate();
-			response.sendRedirect("login.jsp");
-		} else if (path.equals("/insertBoard.do")) {
-			request.setCharacterEncoding("utf-8");
-			AbstractApplicationContext container = new GenericXmlApplicationContext("applicationContext.xml");
-			BoardService boardService = (BoardService) container.getBean("boardService");
-
-			String title = request.getParameter("title");
-			String writer = request.getParameter("writer");
-			String content = request.getParameter("content");
-
-			BoardVO vo = new BoardVO();
-			vo.setTitle(title);
-			vo.setWriter(writer);
-			vo.setContent(content);
-
-			boardService.insertBoard(vo);
-			response.sendRedirect("getBoardList.do");
-		} else if (path.equals("/updateBoard.do")) {
-			request.setCharacterEncoding("utf-8");
-			AbstractApplicationContext container = new GenericXmlApplicationContext("applicationContext.xml");
-			BoardService boardService = (BoardService) container.getBean("boardService");
-			
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
-			String seq = request.getParameter("seq");
-			
-			BoardVO vo = new BoardVO();
-			vo.setTitle(title);
-			vo.setContent(content);
-			vo.setSeq(Integer.parseInt(seq));
-			
-			boardService.updateBoard(vo);
-			
-			response.sendRedirect("getBoardList.jsp");
-		} else if (path.equals("/deleteBoard.do")) {
-			AbstractApplicationContext container = new GenericXmlApplicationContext("applicationContext.xml");
-			BoardService boardService = (BoardService) container.getBean("boardService");
-			String seq = request.getParameter("seq");
-
-			BoardVO vo = new BoardVO();
-			vo.setSeq(Integer.parseInt(seq));
-			
-			boardService.deleteBoard(vo);
-			
-			response.sendRedirect("/getBoardList.do");
-		} else if (path.equals("/getBoard.do")) {
-			String seq = request.getParameter("seq");
-
-			AbstractApplicationContext container = new GenericXmlApplicationContext("applicationContext.xml");
-
-			BoardService boardService = (BoardService) container.getBean("boardService");
-			BoardVO vo = new BoardVO();
-			vo.setSeq(Integer.parseInt(seq));
-
-			BoardVO board = boardService.getBoard(vo);
-			logger.info("getBoard 실행 중");
-			HttpSession session = request.getSession();
-			session.setAttribute("board", board);
-			response.sendRedirect("getBoard.jsp");
-		} else if (path.equals("/getBoardList.do")) {
-			AbstractApplicationContext container = new GenericXmlApplicationContext("applicationContext.xml");
-			BoardService boardService = (BoardService) container.getBean("boardService");
-			// 1. 사용자 입력 정보 추출
-			// 2. DB 연동 처리
-			List<BoardVO> boardList = boardService.getBoardList();
-
-			HttpSession session = request.getSession();
-			session.setAttribute("boardList", boardList);
-			response.sendRedirect("getBoardList.jsp");
+		//2.HandlerMapping을 통해 path에 해당하는 Controller를 검색한다.
+		Controller ctrl = handlerMapping.getController(path);
+		
+		//3.검색된 Controller를 실행한다.
+		String viewName = ctrl.handleRequest(request, response);
+		
+		//4.ViewResolver를 통해 viewName에 해당하는 화면을 검색한다.
+		String view = null;
+		if(!viewName.contains(".do")) {
+			view = viewResolver.getView(viewName);
+		}else {
+			view = viewName;
 		}
+		
+		//5.검색된 화면으로 이동한다.
+		response.sendRedirect(view);
+		
 	}
 }
