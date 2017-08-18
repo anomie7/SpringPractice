@@ -5,15 +5,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
 
 import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
-import com.springbook.view.controller.Controller;
 
 public class UpdateBoardController implements Controller {
 
 	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		AbstractApplicationContext container = new GenericXmlApplicationContext("applicationContext.xml");
 		BoardService boardService = (BoardService) container.getBean("boardService");
 		
@@ -27,7 +28,9 @@ public class UpdateBoardController implements Controller {
 		vo.setSeq(Integer.parseInt(seq));
 		boardService.updateBoard(vo);
 		
-		return "getBoardList.do";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:getBoardList.do");
+		return mav;
 	}
 
 }
