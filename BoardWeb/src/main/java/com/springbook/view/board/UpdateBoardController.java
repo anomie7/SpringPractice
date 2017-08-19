@@ -1,36 +1,24 @@
 package com.springbook.view.board;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
 
-import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
+import com.springbook.biz.board.impl.BoardDAO;
 
-public class UpdateBoardController implements Controller {
-
-	@Override
-	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
+@Controller
+public class UpdateBoardController{
+	
+	@RequestMapping("updateBoard.do")
+	public String handleRequest(BoardVO vo, BoardDAO boardDAO) {
 		AbstractApplicationContext container = new GenericXmlApplicationContext("applicationContext.xml");
-		BoardService boardService = (BoardService) container.getBean("boardService");
+		boardDAO = (BoardDAO) container.getBean("boardDAO");
 		
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		String seq = request.getParameter("seq");
-		
-		BoardVO vo = new BoardVO();
-		vo.setTitle(title);
-		vo.setContent(content);
-		vo.setSeq(Integer.parseInt(seq));
-		boardService.updateBoard(vo);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:getBoardList.do");
-		return mav;
+		boardDAO.updateBoard(vo);
+		return "getBoardList.do";
 	}
 
 }
