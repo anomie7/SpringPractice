@@ -17,7 +17,7 @@ import com.springbook.biz.board.BoardVO;
 public class BoardDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(BoardDAO.class);
 
 	private final String BOARD_INSERT = "insert into board(seq, title, writer, content)"
@@ -25,7 +25,8 @@ public class BoardDAO {
 	private final String BOARD_UPDATE = "update board set title = ?, content = ? where seq = ?";
 	private final String BOARD_DELETE = "delete board where seq = ?";
 	private final String BOARD_GET = "select * from board where seq = ?";
-	private final String BOARD_LIST = "select * from board order by seq desc";
+	private final String BOARD_LIST_T = "select * from board where title like ? order by seq desc";
+	private final String BOARD_LIST_C = "select * from board where content like ? order by seq desc";
 
 	public void insertBoard(BoardVO vo) {
 		logger.info("====> JDBC로 insertBoard() 기능 처리");
@@ -44,19 +45,25 @@ public class BoardDAO {
 
 	public BoardVO getBoard(BoardVO vo) {
 		logger.info("===> JDBC로 getBoard() 기능 처리");
-		Object[] args = {vo.getSeq()};
+		Object[] args = { vo.getSeq() };
 		return jdbcTemplate.queryForObject(BOARD_GET, args, new BoardRowMapper());
 	}
 
-	public List<BoardVO> getBoardList() {
+	public List<BoardVO> getBoardList(BoardVO vo) {
 		logger.info("===> JDBC로 getBoardList() 기능 처리");
-		return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());
+		Object[] args = { ("%"+vo.getSearchKeyword()+"%") };
+		if (vo.getSearchCondition().equals("TITLE")) {
+			return jdbcTemplate.query(BOARD_LIST_T, args, new BoardRowMapper());
+		} else if (vo.getSearchCondition().equals("CONTENT")) {
+			return jdbcTemplate.query(BOARD_LIST_C, args, new BoardRowMapper());
+		}
+		return null;
 	}
-} 
+}
 
-class BoardRowMapper implements RowMapper<BoardVO>{
+class BoardRowMapper implements RowMapper<BoardVO> {
 	@Override
-	public BoardVO mapRow(ResultSet rs, int rowNum) throws SQLException{
+	public BoardVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BoardVO board = new BoardVO();
 		board.setSeq(rs.getInt("SEQ"));
 		board.setTitle(rs.getString("TITLE"));
