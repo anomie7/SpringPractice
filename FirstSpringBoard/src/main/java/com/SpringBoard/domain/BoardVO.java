@@ -4,7 +4,7 @@ public class BoardVO {
 	private int id;
 	private String name;
 	private String password;
-	private String regDate;
+	private String regdate;
 	private String subject;
 	private String content;
 	private int count;
@@ -34,11 +34,11 @@ public class BoardVO {
 	}
 
 	public String getRegDate() {
-		return regDate;
+		return regdate;
 	}
 
 	public void setRegDate(String regDate) {
-		this.regDate = regDate;
+		this.regdate = regDate;
 	}
 
 	public String getSubject() {
@@ -67,7 +67,7 @@ public class BoardVO {
 
 	@Override
 	public String toString() {
-		return "Board [id=" + id + ", name=" + name + ", password=" + password + ", regDate=" + regDate + ", subject="
+		return "Board [id=" + id + ", name=" + name + ", password=" + password + ", regDate=" + regdate + ", subject="
 				+ subject + ", content=" + content + ", count=" + count + "]";
 	}
 

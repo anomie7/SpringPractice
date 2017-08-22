@@ -18,7 +18,7 @@
 			</dataSource>
 		</environment>
 	</environments>
-	<!-- <mappers>
-		<mapper resource="com.SpringBoard.mappers.mybatis-config.xml" />
-	</mappers> -->
+	<mappers>
+		<mapper resource="com/SpringBoard/mappers/Mapper.xml" />
+	</mappers>
 </configuration>
