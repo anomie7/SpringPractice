@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SpringBoard.mappers.BoardMapper">
+	<resultMap type="board" id="boardResult">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="password" column="password" />
+		<result property="count" column="count" />
+		<result property="regdate" column="regdate" />
+		<result property="subject" column="subject" />
+		<result property="content" column="content" />
+	</resultMap>
+
+	<insert id="insertBoard" parameterType="board">
+		INSERT INTO board (id,
+		name,
+		password, count, regdate, subject, content)
+		VALUES(#{id},#{name},#{password}, #{count}, #{regdate}, #{subject},
+		#{content})
+	</insert>
+
+	<select id="findBoardById" parameterType="int" resultMap="boardResult">
+		select
+		* from board where id = #{id}
+	</select>
+
+	<select id="findAllBoard" resultMap="boardResult">
+		select * from board;
+	</select>
+
+	<update id="modifyBoard" parameterType="board">
+		update board set subject
+		= #{subject}, content = #{content} where id = #{id}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where
+		id = #{id}
+	</delete>
+</mapper>
