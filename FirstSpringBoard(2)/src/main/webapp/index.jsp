@@ -24,7 +24,7 @@
 			<table class="table table-striped ">
 				<tr class="text-center">
 					<th>번호</th>
-					<th>제목</th>
+					<th style="text-align: center">제목</th>
 					<th>작성자</th>
 					<th>등록일</th>
 					<th>조회</th>
@@ -32,16 +32,16 @@
 				<c:forEach items="${boardList}" var="board">
 				<tr>
 					<td class="col-sm-1">${board.id}</td>
-					<td><a href="#">${board.subject }</a></td>
-					<td>${board.name }</td>
-					<td>${board.regDate }</td>
+					<td style="text-align:center"><a href="boardRead.do?id=${board.id}">${board.subject }</a></td>
+					<td class="col-sm-2">${board.name}</td>
+					<td class="col-sm-2">${board.regDate}</td>
 					<td class="col-sm-1">${board.count}</td>
 				</tr>
 				</c:forEach>
 			</table>
+			<div class="btn-group col-md-offset-10">
+			<a href="board_write.jsp" class="btn btn-default">글쓰기</a>
 		</div>
-		<div class="btn-group col-md-offset-10">
-			<a href="#" class="btn btn-default">글쓰기</a>
 		</div>
 	</div>
 </body>

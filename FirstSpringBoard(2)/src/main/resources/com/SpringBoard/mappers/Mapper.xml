@@ -3,6 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.SpringBoard.mappers.BoardMapper">
+
 	<resultMap type="board" id="boardResult">
 		<id property="id" column="id" />
 		<result property="name" column="name" />
@@ -22,17 +23,16 @@
 	</insert>
 
 	<select id="findBoardById" parameterType="int" resultMap="boardResult">
-		select
-		* from board where id = #{id}
+		select * from board where id = #{id}
 	</select>
 
 	<select id="findAllBoard" resultMap="boardResult">
-		select * from board;
+		select * from board order by id desc;
 	</select>
 
 	<update id="modifyBoard" parameterType="board">
 		update board set subject
-		= #{subject}, content = #{content} where id = #{id}
+		= #{subject}, content = #{content}, count = #{count} where id = #{id}
 	</update>
 
 	<delete id="deleteBoard" parameterType="int">

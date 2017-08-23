@@ -1,6 +1,7 @@
 package com.SpringBoard.domain;
 
 public class BoardVO {
+	
 	private int id;
 	private String name;
 	private String password;
