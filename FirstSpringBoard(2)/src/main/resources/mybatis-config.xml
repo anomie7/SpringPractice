@@ -7,5 +7,7 @@
 	<typeAliases>
 		<typeAlias type="com.SpringBoard.domain.BoardVO" alias="board"></typeAlias>
 	</typeAliases>
-	
+	<mappers>
+		<mapper resource="com/SpringBoard/mappers/Mapper.xml" />
+	</mappers>
 </configuration>
