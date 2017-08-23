@@ -3,6 +3,8 @@ package com.SpringBoard.model;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.SpringBoard.domain.BoardVO;
@@ -11,9 +13,10 @@ import com.SpringBoard.mappers.BoardMapper;
 public class BoardDAO {
 	@Autowired
 	SqlSession sqlSession;
+	private static final Logger logger = LoggerFactory.getLogger(BoardDAO.class);
 	
 	public BoardDAO() {
-		System.out.println("DAO 객체생성");
+		logger.debug("DAO 객체생성");
 	}
 	
 	public void createBoard(BoardVO vo) {

@@ -14,7 +14,7 @@ public class BoardServiceImpl implements BoardService {
 	private static final Logger logger = LoggerFactory.getLogger(BoardServiceImpl.class);
 	
 	public BoardServiceImpl() {
-			System.out.println("Service 객체생성");
+			logger.debug("Service 객체생성");
 	}
 	@Override
 	public void createBoard(BoardVO vo) {

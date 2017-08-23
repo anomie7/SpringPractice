@@ -41,7 +41,39 @@
 			</table>
 			<div class="btn-group col-md-offset-10">
 			<a href="board_write.jsp" class="btn btn-default">글쓰기</a>
+			</div>
 		</div>
+		<div class="col-md-offset-6">
+			<ul class="pagination">
+				<li><a href="getList.do?nowpage=0">처음</a></li>
+				
+				<!--현재 페이지가 0보다 작아질 경우 이전 버튼을 disabled하는 조건문  -->
+				<c:choose>
+				<c:when test="${nowpage <= 0}">
+				<li class="disabled"><a href="#">이전</a></li>
+				</c:when>
+				<c:otherwise>
+				<li><a href="getList.do?nowpage=${nowpage-1}">이전</a></li>
+				</c:otherwise>
+				</c:choose>
+				
+				<!--해당하는 페이지로 갈 수 있는 버튼  -->
+				<c:forEach var="i" begin="0" end="${totalpage-1}" >
+  				<li><a href="getList.do?nowpage=${i}">${i+1}</a></li>
+				</c:forEach>
+				
+				<!--현재 페이지가 totalpage보다 커질 경우 다음 버튼을 disabled하는 조건문  -->
+  				<c:choose>
+  				<c:when test="${nowpage >= totalpage-1 }">
+  				<li class="disabled"><a href="#">다음</a></li>
+  				</c:when>
+  				<c:otherwise>
+  				<li><a href="getList.do?nowpage=${nowpage+1}">다음</a></li>
+  				</c:otherwise>
+  				</c:choose>
+  				
+  				<li><a href="getList.do?nowpage=${totalpage-1}">마지막</a></li>
+			</ul>
 		</div>
 	</div>
 </body>

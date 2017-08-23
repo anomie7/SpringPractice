@@ -1,6 +1,7 @@
 package com.SpringBoard.web;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.SpringBoard.domain.BoardVO;
 import com.SpringBoard.model.BoardService;
@@ -21,11 +23,23 @@ public class FirstBoardController {
 	private static final Logger logger = LoggerFactory.getLogger(FirstBoardController.class);
 
 	@RequestMapping("/getList.do")
-	public String home(Model model) {
-		List<BoardVO> list = boardService.getBoardList();
+	public String home(Model model,@RequestParam(value ="nowpage", defaultValue = "0") int nowpage) {
+		int row = 3;
+		List<BoardVO> list = new ArrayList<>();
+		List<BoardVO> temp = boardService.getBoardList();
+		int totalpage = temp.size() / 3;
+		if((list.size() % 3) > 0) totalpage++;
+		logger.debug("totalpage : {}", totalpage);
+		
+		for(int i = nowpage * row; i < (nowpage * row) + row; i++) {
+			list.add(temp.get(i));
+		}
+		
 		for (BoardVO board : list) {
 			board.setRegDate(board.getRegDate().substring(0, 11)); 
 		}
+		model.addAttribute("nowpage", nowpage);
+		model.addAttribute("totalpage", totalpage);
 		model.addAttribute("boardList", list);
 		return "index.jsp";
 	}
