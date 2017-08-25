@@ -1,5 +1,6 @@
 package com.SpringBoard.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -43,4 +44,19 @@ public class BoardDAO {
 			BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
 			boardMapper.deleteBoard(id);
 		}
+	
+	public List<BoardVO> getSearchWriter(String writer){
+			BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
+			return boardMapper.findBoardByWriter(writer);
+	}
+
+	public List<BoardVO> getSearchWriterAndContent(HashMap<String, String> map) {
+		BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
+		return boardMapper.getSearchWriterAndContent(map);
+	}
+
+	public List<BoardVO> getSearchContent(String content) {
+		BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
+		return boardMapper.findBoardByContent(content);
+	}
 }

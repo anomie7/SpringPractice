@@ -1,8 +1,8 @@
 package com.SpringBoard.test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
@@ -29,7 +29,7 @@ public class ContextTest {
 	public void testsetup() throws Exception {
 		logger.debug("DAO 객체 생성완료");
 		vo = new BoardVO();
-		vo.setId(10);
+		vo.setId(22);
 		vo.setName("윤준");
 		vo.setSubject("안녕1");
 		vo.setContent("반가워요22");
@@ -74,6 +74,33 @@ public class ContextTest {
 	public void deleteBoardTest() throws Exception {
 		boardService.deleteBoard(vo.getId());
 		assertNull(boardService.getBoard(vo.getId()));
+	}
+	
+	@Test
+	public void SearchWriterTest() throws Exception {
+		List<BoardVO> list = boardService.getSearchWriter("%아%");
+		for (BoardVO vo : list) {
+			logger.info(vo.toString());
+		}
+	}
+	
+	@Test
+	public void SearchContentTest() throws Exception {
+		List<BoardVO> list = boardService.getSearchContent("%22%");
+		for (BoardVO vo : list) {
+			logger.info(vo.toString());
+		}
+	}
+	
+	@Test
+	public void SearchWriterAndContentTest() throws Exception {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("writer", "%윤준%");
+		map.put("content", "%22%");
+		List<BoardVO> list = boardService.getSearchWriterAndContent(map);
+		for (BoardVO vo : list) {
+			logger.info(vo.toString());
+		}
 	}
 
 }

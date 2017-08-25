@@ -29,7 +29,19 @@
 	<select id="findAllBoard" resultMap="boardResult">
 		select * from board order by id desc;
 	</select>
-
+	
+	<select id="findBoardByWriter" parameterType="String" resultMap="boardResult">
+		select *from board where name like #{writer}
+	</select>
+	
+	<select id="findBoardByContent" parameterType="String" resultMap="boardResult">
+		select *from board where content like #{content}
+	</select>
+	
+	<select id="getSearchWriterAndContent" parameterType="HashMap" resultMap="boardResult">
+		select *from board where content like #{content} and name like #{writer}
+	</select>
+ 
 	<update id="modifyBoard" parameterType="board">
 		update board set subject
 		= #{subject}, content = #{content}, count = #{count} where id = #{id}

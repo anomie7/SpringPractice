@@ -1,5 +1,6 @@
 package com.SpringBoard.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,10 +13,11 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDAO boardDAO;
 	private static final Logger logger = LoggerFactory.getLogger(BoardServiceImpl.class);
-	
+
 	public BoardServiceImpl() {
-			logger.debug("Service 객체생성");
+		logger.debug("Service 객체생성");
 	}
+
 	@Override
 	public void createBoard(BoardVO vo) {
 		logger.debug("createBoard 메소드 호출");
@@ -47,6 +49,24 @@ public class BoardServiceImpl implements BoardService {
 		logger.debug("delete 메소드 호출");
 		boardDAO.deleteBoard(id);
 		logger.debug("delete 메소드 작업 완료");
+	}
+
+	@Override
+	public List<BoardVO> getSearchWriter(String writer) {
+		logger.debug("getSearchWriter 메소드 호출");
+		return boardDAO.getSearchWriter(writer);
+	}
+
+	@Override
+	public List<BoardVO> getSearchContent(String content) {
+		logger.debug("getSearchContent 메소드 호출");
+		return boardDAO.getSearchContent(content);
+	}
+
+	@Override
+	public List<BoardVO> getSearchWriterAndContent(HashMap<String, String> map) {
+		logger.debug("getSearchWriterAndContent 메소드 호출");
+		return boardDAO.getSearchWriterAndContent(map);
 	}
 
 }
