@@ -51,8 +51,8 @@ public class BoardDAO {
 		return boardMapper.getSearchWriterAndContent(map);
 	}
 	
-	public int getTotalCount() {
+	public int getTotalCount(HashMap<String, Object> map) {
 		BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
-		return boardMapper.findTotalCount();
+		return boardMapper.findTotalCount(map);
 	}
 }

@@ -78,7 +78,8 @@ public class ContextTest {
 	
 	@Test
 	public void getTotalCountTest() throws Exception {
-		int totallist = boardService.getTotalCount();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int totallist = boardService.getTotalCount(map);
 		logger.info(totallist + "");
 	}
 	@Test

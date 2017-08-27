@@ -25,25 +25,25 @@ public class FirstBoardController {
 	@RequestMapping("/getList.do")
 	public String home(Model model, BoardVO board,
 			@RequestParam(value ="nowpage", defaultValue = "0") int nowpage) {
-		int totalList = boardService.getTotalCount();
-		logger.info("totalCount : {}", totalList);
 		int row = 3;
-		int totalpage = totalList / row - 1;
-		if((totalList % row) > 0) totalpage++;
-		logger.info("totalpage: {}", totalpage);
 		int startpoint = nowpage * row;
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put(board.getSearchCondition(), "%"+ board.getSearchKeyword() + "%");
 		map.put("startpoint", startpoint);
 		map.put("row", row);
-		
 		List<BoardVO> list;
 		list = boardService.getSearchWriterAndContent(map);
+		
+		int totalList = boardService.getTotalCount(map);
+		int totalpage = totalList / row - 1;
+		if((totalList % row) > 0) totalpage++;
+		logger.info("totalpage: {}", totalpage);
 		
 		model.addAttribute("boardList",list);
 		model.addAttribute("nowpage",nowpage);
 		model.addAttribute("totalpage", totalpage);
+		model.addAttribute("vo", board);
 		return "index.jsp";
 	}
 	

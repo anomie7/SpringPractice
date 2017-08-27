@@ -30,8 +30,18 @@
 		select * from board order by id desc;
 	</select>
 	
-	<select id="findTotalCount" resultType="int">
-		select count(*) from board
+	<select id="findTotalCount" parameterType="HashMap" resultType="int">
+		select count(*) from board 
+		
+		<where>
+		<if test="content != null">
+		content like #{content} 
+		</if>
+		
+		<if test="writer != null">
+		AND name like #{writer}
+		</if>
+		</where>
 	</select>
 	
 	<select id="getSearchWriterAndContent" parameterType="HashMap" resultMap="boardResult">

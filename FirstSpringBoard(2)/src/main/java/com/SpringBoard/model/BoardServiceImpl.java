@@ -58,9 +58,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int getTotalCount() {
+	public int getTotalCount(HashMap<String, Object> map) {
 		logger.debug("getTotalCount() 메소드 호출");
-		return boardDAO.getTotalCount();
+		return boardDAO.getTotalCount(map);
 	}
 
 }

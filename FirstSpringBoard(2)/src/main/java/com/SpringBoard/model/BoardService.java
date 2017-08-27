@@ -17,7 +17,7 @@ public interface BoardService {
 
 	void deleteBoard(int id);
 	
-	public int getTotalCount();
+	public int getTotalCount(HashMap<String, Object> map);
 
 	List<BoardVO> getSearchWriterAndContent(HashMap<String, Object> map);
 
