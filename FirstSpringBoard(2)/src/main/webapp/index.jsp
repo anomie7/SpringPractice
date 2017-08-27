@@ -68,13 +68,13 @@
 				</c:choose>
 				
 				<!--해당하는 페이지로 갈 수 있는 버튼  -->
-				<c:forEach var="i" begin="0" end="${totalpage-1}" >
+				<c:forEach var="i" begin="0" end="${totalpage}" >
   				<li><a href="getList.do?nowpage=${i}">${i+1}</a></li>
 				</c:forEach>
 				
 				<!--현재 페이지가 totalpage보다 커질 경우 다음 버튼을 disabled하는 조건문  -->
   				<c:choose>
-  				<c:when test="${nowpage >= totalpage-1 }">
+  				<c:when test="${nowpage >= totalpage }">
   				<li class="disabled"><a href="#">다음</a></li>
   				</c:when>
   				<c:otherwise>
@@ -82,7 +82,7 @@
   				</c:otherwise>
   				</c:choose>
   				
-  				<li><a href="getList.do?nowpage=${totalpage-1}">마지막</a></li>
+  				<li><a href="getList.do?nowpage=${totalpage}">마지막</a></li>
 			</ul>
 		</div>
 	</div>

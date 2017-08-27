@@ -1,21 +1,16 @@
 package com.SpringBoard.web;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -43,12 +38,27 @@ public class FirstBoardController {
 			temp = boardService.getBoardList();
 		}
 		
-		int totalpage = temp.size() / 3;
-		if((list.size() % 3) > 0) totalpage++;
-		logger.debug("totalpage : {}", totalpage);
+		int totalpage = temp.size() / row - 1;
+		if((temp.size() % row) > 0) totalpage++;
 		
-		for(int i = nowpage * row; i < (nowpage * row) + row; i++) {
-			list.add(temp.get(i));
+		logger.debug("totalpage : {} nowpage: {}", totalpage, nowpage);
+		logger.debug("totallist: {}",temp.size());
+		
+		if(nowpage != totalpage)
+			for(int i = nowpage * row; i < (nowpage * row) + row; i++) {
+				list.add(temp.get(i));
+			}
+			
+		if(nowpage == totalpage) {
+			if(temp.size() % row > 0) {
+				for(int i = nowpage * row; i < (nowpage * row) + (temp.size() % row); i++) {
+					list.add(temp.get(i));
+				}
+				}else {
+					for(int i = nowpage * row; i < (nowpage * row) + row; i++) {
+						list.add(temp.get(i));
+					}
+				}
 		}
 		
 		for (BoardVO board : list) {
@@ -96,5 +106,4 @@ public class FirstBoardController {
 		boardService.modifyBoard(vo);
 		return "redirect:/getList.do";
 	}
-	
 }

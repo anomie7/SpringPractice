@@ -29,9 +29,7 @@
                     </tr>
                     <tr>
                         <th>내용</th>
-                        <td><textarea class="form-control" name="content" rows="10" cols="">
-                        ${board.content}
-                        </textarea></td>
+                        <td><textarea class="form-control" name="content" rows="10">${board.content}</textarea></td>
                     </tr>
                     <tr>
                         <th>암호</th>
