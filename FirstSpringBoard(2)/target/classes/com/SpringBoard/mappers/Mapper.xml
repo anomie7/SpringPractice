@@ -39,7 +39,19 @@
 	</select>
 	
 	<select id="getSearchWriterAndContent" parameterType="HashMap" resultMap="boardResult">
-		select *from board where content like #{content} and name like #{writer}
+		select *from board
+		<where>
+		<if test="content != null">
+		content like #{content} 
+		</if>
+		
+		<if test="writer != null">
+		AND name like #{writer}
+		</if>
+		</where>
+		<if test="true">
+		order by id desc
+		</if>
 	</select>
  
 	<update id="modifyBoard" parameterType="board">

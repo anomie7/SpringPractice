@@ -1,15 +1,21 @@
 package com.SpringBoard.web;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,10 +29,20 @@ public class FirstBoardController {
 	private static final Logger logger = LoggerFactory.getLogger(FirstBoardController.class);
 
 	@RequestMapping("/getList.do")
-	public String home(Model model,@RequestParam(value ="nowpage", defaultValue = "0") int nowpage) {
+	public String home(Model model, @RequestParam(value="searchCondition", defaultValue = "null", required=false) String searchCondition,
+			@RequestParam(value="searchkeyword", defaultValue="null", required=false) String searchkeyword,
+			@RequestParam(value ="nowpage", defaultValue = "0") int nowpage) {
 		int row = 3;
 		List<BoardVO> list = new ArrayList<>();
-		List<BoardVO> temp = boardService.getBoardList();
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put(searchCondition, "%"+ searchkeyword + "%");
+		logger.debug("searchCondition : {}, searchkeyword : {}", searchCondition, searchkeyword); 
+		List<BoardVO> temp = boardService.getSearchWriterAndContent(map);
+		
+		if(temp.size() == 0) {
+			temp = boardService.getBoardList();
+		}
+		
 		int totalpage = temp.size() / 3;
 		if((list.size() % 3) > 0) totalpage++;
 		logger.debug("totalpage : {}", totalpage);

@@ -95,8 +95,8 @@ public class ContextTest {
 	@Test
 	public void SearchWriterAndContentTest() throws Exception {
 		HashMap<String, String> map = new HashMap<>();
-		map.put("writer", "%윤준%");
-		map.put("content", "%22%");
+		map.put("writer", "");
+		map.put("content", "");
 		List<BoardVO> list = boardService.getSearchWriterAndContent(map);
 		for (BoardVO vo : list) {
 			logger.info(vo.toString());

@@ -20,6 +20,16 @@
 		<div class="page-hearder col-md-offset-3" style="padding-bottom: 20px">
 			<h1>메인화면</h1>
 		</div>
+		<div class="col-sm-offset-9">
+                <form action="getList.do" method="get">
+                    <select name="searchCondition" id="">
+                        <option value="writer">작성자</option>
+                        <option value="content">내용</option>
+                    </select>
+                    <input type="text" name="searchkeyword" id="search">
+                    <input class="btn btn-sm btn-default" type="submit" value="검색">
+                </form>
+            </div>
 		<div class="col-md-10 col-md-offset-3">
 			<table class="table table-striped ">
 				<tr class="text-center">
