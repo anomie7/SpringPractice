@@ -30,12 +30,8 @@
 		select * from board order by id desc;
 	</select>
 	
-	<select id="findBoardByWriter" parameterType="String" resultMap="boardResult">
-		select *from board where name like #{writer}
-	</select>
-	
-	<select id="findBoardByContent" parameterType="String" resultMap="boardResult">
-		select *from board where content like #{content}
+	<select id="findTotalCount" resultType="int">
+		select count(*) from board
 	</select>
 	
 	<select id="getSearchWriterAndContent" parameterType="HashMap" resultMap="boardResult">
@@ -50,7 +46,7 @@
 		</if>
 		</where>
 		<if test="true">
-		order by id desc
+		order by id desc limit #{startpoint}, #{row}
 		</if>
 	</select>
  

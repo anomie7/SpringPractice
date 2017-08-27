@@ -77,26 +77,16 @@ public class ContextTest {
 	}
 	
 	@Test
-	public void SearchWriterTest() throws Exception {
-		List<BoardVO> list = boardService.getSearchWriter("%아%");
-		for (BoardVO vo : list) {
-			logger.info(vo.toString());
-		}
+	public void getTotalCountTest() throws Exception {
+		int totallist = boardService.getTotalCount();
+		logger.info(totallist + "");
 	}
-	
-	@Test
-	public void SearchContentTest() throws Exception {
-		List<BoardVO> list = boardService.getSearchContent("%22%");
-		for (BoardVO vo : list) {
-			logger.info(vo.toString());
-		}
-	}
-	
 	@Test
 	public void SearchWriterAndContentTest() throws Exception {
-		HashMap<String, String> map = new HashMap<>();
-		map.put("writer", "");
-		map.put("content", "");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startpoint", 1);
+		map.put("row", 3);
+		
 		List<BoardVO> list = boardService.getSearchWriterAndContent(map);
 		for (BoardVO vo : list) {
 			logger.info(vo.toString());

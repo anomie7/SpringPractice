@@ -45,18 +45,14 @@ public class BoardDAO {
 			boardMapper.deleteBoard(id);
 		}
 	
-	public List<BoardVO> getSearchWriter(String writer){
-			BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
-			return boardMapper.findBoardByWriter(writer);
-	}
 
-	public List<BoardVO> getSearchWriterAndContent(HashMap<String, String> map) {
+	public List<BoardVO> getSearchWriterAndContent(HashMap<String, Object> map) {
 		BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
 		return boardMapper.getSearchWriterAndContent(map);
 	}
-
-	public List<BoardVO> getSearchContent(String content) {
+	
+	public int getTotalCount() {
 		BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
-		return boardMapper.findBoardByContent(content);
+		return boardMapper.findTotalCount();
 	}
 }

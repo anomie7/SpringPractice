@@ -1,7 +1,6 @@
 package com.SpringBoard.web;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,49 +23,27 @@ public class FirstBoardController {
 	private static final Logger logger = LoggerFactory.getLogger(FirstBoardController.class);
 
 	@RequestMapping("/getList.do")
-	public String home(Model model, @RequestParam(value="searchCondition", defaultValue = "null", required=false) String searchCondition,
-			@RequestParam(value="searchkeyword", defaultValue="null", required=false) String searchkeyword,
+	public String home(Model model, BoardVO board,
 			@RequestParam(value ="nowpage", defaultValue = "0") int nowpage) {
+		int totalList = boardService.getTotalCount();
+		logger.info("totalCount : {}", totalList);
 		int row = 3;
-		List<BoardVO> list = new ArrayList<>();
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put(searchCondition, "%"+ searchkeyword + "%");
-		logger.debug("searchCondition : {}, searchkeyword : {}", searchCondition, searchkeyword); 
-		List<BoardVO> temp = boardService.getSearchWriterAndContent(map);
+		int totalpage = totalList / row - 1;
+		if((totalList % row) > 0) totalpage++;
+		logger.info("totalpage: {}", totalpage);
+		int startpoint = nowpage * row;
 		
-		if(temp.size() == 0) {
-			temp = boardService.getBoardList();
-		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put(board.getSearchCondition(), "%"+ board.getSearchKeyword() + "%");
+		map.put("startpoint", startpoint);
+		map.put("row", row);
 		
-		int totalpage = temp.size() / row - 1;
-		if((temp.size() % row) > 0) totalpage++;
+		List<BoardVO> list;
+		list = boardService.getSearchWriterAndContent(map);
 		
-		logger.debug("totalpage : {} nowpage: {}", totalpage, nowpage);
-		logger.debug("totallist: {}",temp.size());
-		
-		if(nowpage != totalpage)
-			for(int i = nowpage * row; i < (nowpage * row) + row; i++) {
-				list.add(temp.get(i));
-			}
-			
-		if(nowpage == totalpage) {
-			if(temp.size() % row > 0) {
-				for(int i = nowpage * row; i < (nowpage * row) + (temp.size() % row); i++) {
-					list.add(temp.get(i));
-				}
-				}else {
-					for(int i = nowpage * row; i < (nowpage * row) + row; i++) {
-						list.add(temp.get(i));
-					}
-				}
-		}
-		
-		for (BoardVO board : list) {
-			board.setRegDate(board.getRegDate().substring(0, 11)); 
-		}
-		model.addAttribute("nowpage", nowpage);
+		model.addAttribute("boardList",list);
+		model.addAttribute("nowpage",nowpage);
 		model.addAttribute("totalpage", totalpage);
-		model.addAttribute("boardList", list);
 		return "index.jsp";
 	}
 	

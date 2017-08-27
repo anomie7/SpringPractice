@@ -9,6 +9,8 @@ public class BoardVO {
 	private String subject;
 	private String content;
 	private int count;
+	private String searchKeyword;
+	private String searchCondition;
 	
 	public int getId() {
 		return id;
@@ -64,6 +66,22 @@ public class BoardVO {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
 	}
 
 	@Override

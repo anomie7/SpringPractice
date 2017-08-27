@@ -26,7 +26,7 @@
                         <option value="writer">작성자</option>
                         <option value="content">내용</option>
                     </select>
-                    <input type="text" name="searchkeyword" id="search">
+                    <input type="text" name="searchKeyword" id="search">
                     <input class="btn btn-sm btn-default" type="submit" value="검색">
                 </form>
             </div>

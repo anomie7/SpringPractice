@@ -52,21 +52,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getSearchWriter(String writer) {
-		logger.debug("getSearchWriter 메소드 호출");
-		return boardDAO.getSearchWriter(writer);
-	}
-
-	@Override
-	public List<BoardVO> getSearchContent(String content) {
-		logger.debug("getSearchContent 메소드 호출");
-		return boardDAO.getSearchContent(content);
-	}
-
-	@Override
-	public List<BoardVO> getSearchWriterAndContent(HashMap<String, String> map) {
-		logger.debug("getSearchWriterAndContent 메소드 호출");
+	public List<BoardVO> getSearchWriterAndContent(HashMap<String, Object> map) {
+		logger.debug("getSearchWriterAndContent() 메소드 호출");
 		return boardDAO.getSearchWriterAndContent(map);
+	}
+
+	@Override
+	public int getTotalCount() {
+		logger.debug("getTotalCount() 메소드 호출");
+		return boardDAO.getTotalCount();
 	}
 
 }
