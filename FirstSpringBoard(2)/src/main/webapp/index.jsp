@@ -16,10 +16,19 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="home.html" class="navbar-brand">FirstSpring Project</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="">로그인</a></li>
+                    <li><a href="">회원가입</a></li>
+                    <li><a href="getList.do">게시판</a></li>
+                </ul>
+            </div>
+        </nav>
 	<div class="container row">
-		<div class="page-hearder col-md-offset-3" style="padding-bottom: 20px">
-			<h1>메인화면</h1>
-		</div>
 		<div class="col-sm-offset-9">
                 <form action="getList.do" method="get">
                     <select name="searchCondition" id="">

@@ -6,30 +6,46 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	
+	<!--db.properties에 있던 DB정보를 datasource로 옮겨주었습니다.  -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/test"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="1234"></property>
 	</bean>
 	
+	<!--우리가 직접 만들어줬던 Util클래스를 대체하는 SqlSessionFactoryBean입니다. 
+		DB연동 정보는 Datasource을 통해서 들어가고요. mybatis-config.xml에서 마이바티스 설정을 불러옵니다.
+	  -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
 	</bean>
 	
+	<!--SqlSession도 빈으로 등록해서 생성합니다. SqlSessionTemplate는 트랜잭션 처리를 알아서 해주고 스레드에 대해서 안전합니다.
+		SqlSessionTemplate는 setter가 없기 때문에 constructor-arg 엘리먼트를 사용해서 Factory를 주입해요.
+	  -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	
-	<bean id="board" class="com.SpringBoard.domain.BoardVO"></bean>
-	
+	<!--스프링 빈 설정을 어노테이션으로 해주겠다는 엘리먼트입니다. 
+		위의 예처럼 <property>나 <constructor-arg> 엘리먼트를 사용해서 의존성을 주입해주기도 하지만
+		@AutoWried @Resource @Inject 같은 애노테이션으로 생성자나 setter없이 간편하게 객체를 주입하는 방법을 많이들 선호합니다.
+	  -->
 	<context:annotation-config></context:annotation-config>
 	
+	<!--애노테이션을 이용해서 빈 설정을 할 패키지의 범위를 정해줍니다. 
+	최상위인 com.SpringBoard로 설정해서 하위의 모든 패키지를 포함해주세요.  -->
 	<context:component-scan base-package="com.SpringBoard" >
 	</context:component-scan>
 	
+	<!--빈 등록을 해줍니다. 
+	애노테이션을 통해서 빈 등록을 해줘도 되지만 설정 파일에 등록해주는 것이 빈을 관리하기에는 더 편합니다.  
+	우리는 빈 등록은 <bean> 엘리먼트로 하고 의존성 주입은 애노테이션을 이용할 거에요.
+	-->
+	<bean id="board" class="com.SpringBoard.domain.BoardVO"></bean>
 	<bean id="boardDAO" class="com.SpringBoard.model.BoardDAO"></bean>
 	<bean id="boardService" class="com.SpringBoard.model.BoardServiceImpl"></bean>
 </beans>
