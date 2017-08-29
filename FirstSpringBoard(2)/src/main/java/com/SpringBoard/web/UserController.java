@@ -3,7 +3,6 @@ package com.SpringBoard.web;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +53,12 @@ public class UserController {
 	@RequestMapping("/logout.do")
 	public String logout(SessionStatus session) {
 		session.setComplete();
+		return "home.do";
+	}
+	
+	@RequestMapping("/update.do")
+	public String update(UserVO up) {
+		userDAO.updateUser(up);
 		return "home.do";
 	}
 }

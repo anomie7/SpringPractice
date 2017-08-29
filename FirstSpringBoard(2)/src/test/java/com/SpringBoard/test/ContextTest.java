@@ -35,7 +35,6 @@ public class ContextTest {
 		vo.setContent("반가워요22");
 		vo.setRegDate("2017-10-2-2");
 		vo.setCount(4);
-		vo.setPassword("1234");
 		logger.debug("테스트 객체 생성완료");
 	}
 

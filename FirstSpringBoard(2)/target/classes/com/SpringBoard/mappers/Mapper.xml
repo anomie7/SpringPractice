@@ -7,7 +7,6 @@
 	<resultMap type="board" id="boardResult">
 		<id property="id" column="id" />
 		<result property="name" column="name" />
-		<result property="password" column="password" />
 		<result property="count" column="count" />
 		<result property="regdate" column="regdate" />
 		<result property="subject" column="subject" />
@@ -16,9 +15,8 @@
 
 	<insert id="insertBoard" parameterType="board">
 		INSERT INTO board (id,
-		name,
-		password, count, regdate, subject, content)
-		VALUES(#{id},#{name},#{password}, #{count}, #{regdate}, #{subject},
+		name, count, regdate, subject, content)
+		VALUES(#{id},#{name}, #{count}, #{regdate}, #{subject},
 		#{content})
 	</insert>
 

@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
+<%@include file="commons/top.jsp" %>
+</head>
     <body>
         <%@include file="commons/navbar.jsp" %>
         <div class="container">
@@ -33,13 +25,10 @@
                         <td><textarea class="form-control" name="content" rows="10">${board.content}</textarea></td>
                     </tr>
                     <tr>
-                        <th>암호</th>
-                        <td><input class="form-control" type="password" name="password" value="${board.password}">
-                        	<input type="hidden" name="id" value="${board.id}">
+                        <td class="text-center" colspan="2">
+                        <input class="btn btn-primary" type="hidden" name="id" value="${board.id}">
+                        <input class="btn btn-primary" type="submit" value="수정">
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center" colspan="2"><input class="btn btn-primary" type="submit" value="수정"></td>
                     </tr>  
                 </table>
             </form>

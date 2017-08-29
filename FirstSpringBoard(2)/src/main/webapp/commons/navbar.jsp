@@ -10,7 +10,7 @@
                 <c:choose>
                 <c:when test="${not empty sessionScope.id }">
                     <li><a href="logout.do">로그아웃</a></li>
-                    <li><a href="#">개인 정보 수정</a></li>
+                    <li><a href="join.jsp">개인 정보 수정</a></li>
                 </c:when>
                 <c:otherwise>
                     <li><a href="login.jsp">로그인</a></li>
