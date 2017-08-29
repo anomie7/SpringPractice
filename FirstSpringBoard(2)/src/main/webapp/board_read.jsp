@@ -5,6 +5,14 @@
     <style>
     	pre {border: 0; background-color: transparent;}
 	</style>
+	<script>
+		function deleteChk(){
+			var isdel = confirm("정말 삭제하시겠어요?");
+			if(isdel == true){
+				location.href = "deleteBoard.do?id=${board.id}";
+			}
+		}
+	</script>
 </head>
 <body>
     <%@include file="commons/navbar.jsp" %>
@@ -33,7 +41,7 @@
                     <a href="getList.do" class="btn btn-default">목록</a>
                     <c:if test="${board.name eq sessionScope.id}">
                     <a href="boardUpdate.do?id=${board.id}" class="btn btn-default">수정</a>
-                    <a href="deleteBoard.do?id=${board.id}" class="btn btn-default">삭제</a>
+                    <a class="btn btn-default" href="javascript:deleteChk()">삭제</a>
                     </c:if>
                 </span>
         </div>
