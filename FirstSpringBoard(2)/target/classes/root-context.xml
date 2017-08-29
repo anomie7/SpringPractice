@@ -29,6 +29,16 @@
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	
+	<bean id="boardMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.SpringBoard.mappers.BoardMapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.SpringBoard.mappers.UserMapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
 	<!--스프링 빈 설정을 어노테이션으로 해주겠다는 엘리먼트입니다. 
 		위의 예처럼 <property>나 <constructor-arg> 엘리먼트를 사용해서 의존성을 주입해주기도 하지만
 		@AutoWried @Resource @Inject 같은 애노테이션으로 생성자나 setter없이 간편하게 객체를 주입하는 방법을 많이들 선호합니다.
