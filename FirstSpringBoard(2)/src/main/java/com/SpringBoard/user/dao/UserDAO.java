@@ -1,14 +1,11 @@
 package com.SpringBoard.user.dao;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.SpringBoard.domain.UserVO;
 import com.SpringBoard.exceptions.IdNotMatchException;
 import com.SpringBoard.exceptions.PasswordNotMatchException;
 import com.SpringBoard.mappers.UserMapper;
-import com.sun.media.jfxmedia.logging.Logger;
 
 public class UserDAO {
 	@Autowired
@@ -16,6 +13,10 @@ public class UserDAO {
 
 	public void joinUser(UserVO vo) {
 		userMapper.insertUser(vo);
+	}
+	
+	public UserVO getUserById(String id) {
+		return userMapper.selectUser(id);
 	}
 
 	public void login(UserVO vo) throws Exception {
@@ -31,4 +32,12 @@ public class UserDAO {
 			throw new IdNotMatchException();
 		}
 	}
+
+	public void updateUser(UserVO up) {
+		userMapper.updateUser(up);
+	}
+	
+	
+	
+	
 }

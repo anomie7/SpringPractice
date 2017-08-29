@@ -15,7 +15,13 @@
 	</insert>
 	
 	<update id="updateUser" parameterType="user">
-		update user set id = #{id}, password = #{password}, email =  #{email}, tel = #{tel};
+		update user 
+		<set>
+		<if test="password != null">password = #{password},</if>
+		<if test="email != null">email =  #{email}, </if>
+		<if test="tel != null">tel = #{tel} </if>
+		</set>
+		where id = #{id}
 	</update>
 	
 	<select id="selectUser" parameterType="string" resultMap="userResult">

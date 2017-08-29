@@ -40,6 +40,6 @@
   </servlet-mapping>
   
   <welcome-file-list>
-  	<welcome-file>home.html</welcome-file>
+  	<welcome-file>home.do</welcome-file>
   </welcome-file-list>
 </web-app>

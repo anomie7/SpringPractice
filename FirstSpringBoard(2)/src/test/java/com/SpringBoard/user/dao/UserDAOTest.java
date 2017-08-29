@@ -25,7 +25,7 @@ public class UserDAOTest {
 	@Before
 	public void setup() {
 		vo = new UserVO();
-		vo.setId("doit1221");
+		vo.setId("doit122");
 		vo.setPassword("1234");
 		vo.setEmail("doit123@gmail.com");
 		vo.setTel("010-3333-3333");
@@ -48,5 +48,15 @@ public class UserDAOTest {
 			logger.info(e.getMessage());
 		}
 	}
-
+	
+	@Test
+	public void updateTest() {
+		UserVO up = new UserVO();
+		up.setId(vo.getId());
+		up.setEmail("dotidoti@gmail.com");
+//		up.setTel("011-3333-1111");
+		up.setPassword("1111");
+		userDAO.updateUser(up);
+		logger.debug("user: {}" ,userDAO.getUserById(up.getId()).toString());
+	}
 }

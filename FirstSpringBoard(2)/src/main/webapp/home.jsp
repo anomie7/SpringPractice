@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,20 +11,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="home.html" class="navbar-brand">FirstSpring Project</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="">로그인</a></li>
-                    <li><a href="join.html">회원가입</a></li>
-                    <li><a href="getList.do">게시판</a></li>
-                </ul>
-            </div>
-        </nav>
+        <%@include file="commons/navbar.jsp" %>
         <div class="container">
         	<h1>My First Spring Board Project</h1>
+        	<h1>${sessionScope.id}님 환영합니다.</h1>
         </div>
     </body>
 </html>

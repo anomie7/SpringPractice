@@ -16,18 +16,7 @@
 	</style>
 </head>
 <body>
-  <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="home.html" class="navbar-brand">FirstSpring Project</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="">로그인</a></li>
-                    <li><a href="">회원가입</a></li>
-                    <li><a href="getList.do">게시판</a></li>
-                </ul>
-            </div>
-        </nav>
+    <%@include file="commons/navbar.jsp" %>
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
             <div style="padding-bottom: 30px;">
