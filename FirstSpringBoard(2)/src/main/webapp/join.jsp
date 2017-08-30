@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@include file="commons/top.jsp" %>
 <script>
 function joinCheck(f){
@@ -8,7 +9,7 @@ function joinCheck(f){
 		alert("아이디는 필수 입력값입니다.");
 		return false;
 	}
-	if(f.pass.value == ''){
+	if(f.password.value == ''){
 		alert("비밀번호는 필수 입력값입니다.");
 		return false;
 	}
@@ -28,19 +29,27 @@ function joinCheck(f){
                 <table class="table">
                 	<tr>
                         <td>ID</td>
-                        <td><input class="form-control" id="id" type="text" name="id" readonly="readonly" value="${id}"></td>
+                        <td>
+                        <input class="form-control" id="id" type="text" name="id" readonly="readonly" value="${id}">
+                        </td>
                     </tr>
                     <tr>
                         <td>PW</td>
-                        <td><input class="form-control" id="pass" type="password" name="password"></td>
+                        <td>
+                        <input class="form-control" id="pass" type="password" name="password">
+                        </td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><input class="form-control" type="email" name="email"></td>
+                        <td>
+                        <input class="form-control" type="email" name="email">
+                        </td>
                     </tr>
                     <tr>
                         <td>Tel</td>
-                        <td><input class="form-control" type="text" name="tel"></td>
+                        <td>
+                        <input class="form-control" type="text" name="tel">
+                        </td>
                     </tr>
                     <tr>
                         <td class="text-center" colspan="2">
@@ -55,23 +64,35 @@ function joinCheck(f){
             <div class="page-header">
                 <h1>회원가입</h1>
             </div>
-            <form class="form-group row" action="join.do" method="post" onsubmit="return joinCheck(this)">
+               <form:form cssClass="form-group row" modelAttribute="user" action="joinProcess.do" onsubmit="return joinCheck(this)">
                 <table class="table">
                 	<tr>
                         <td>ID</td>
-                        <td><input class="form-control" id="id" type="text" name="id"></td>
+                        <td>
+                        <%-- <input class="form-control" id="id" type="text" name="id" readonly="readonly" value="${id}"> --%>
+                        <form:input cssClass="form-control" path="id"/>
+                        </td>
                     </tr>
                     <tr>
                         <td>PW</td>
-                        <td><input class="form-control" id="pass" type="password" name="password"></td>
+                        <td>
+                        <!-- <input class="form-control" id="pass" type="password" name="password"> -->
+                        <form:password cssClass="form-control" path="password" />
+                        </td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><input class="form-control" type="email" name="email"></td>
+                        <td>
+                        <!-- <input class="form-control" type="email" name="email"> -->
+                        <form:input class="form-control" type="email" path="email"/>
+                        </td>
                     </tr>
                     <tr>
                         <td>Tel</td>
-                        <td><input class="form-control" type="text" name="tel"></td>
+                        <td>
+                        <!-- <input class="form-control" type="text" name="tel"> -->
+                        <form:input cssClass="form-control" path="tel"/>
+                        </td>
                     </tr>
                     <tr>
                         <td class="text-center" colspan="2">
@@ -80,10 +101,9 @@ function joinCheck(f){
                         </td>
                     </tr>
                 </table>
-            </form>
+                </form:form>
             </c:otherwise>
             </c:choose>
-            
         </div>
     </div>
 </body>
