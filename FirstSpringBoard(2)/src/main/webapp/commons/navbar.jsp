@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<nav class="navbar navbar-inverse">
+<nav id="nav" class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a href="home.do" class="navbar-brand">FirstSpring Project</a>
