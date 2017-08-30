@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -30,31 +31,44 @@ public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@RequestMapping("/join.do")
-	public String join(UserVO user, Model model) {
-		model.addAttribute("user", user);
+	public String join(@ModelAttribute("user") UserVO user) {
 		return "join.jsp";
 	}
 	
 	@RequestMapping("/joinProcess.do")
-	public String join(@Valid UserVO vo, BindingResult bindingResult) {
+	public String join(@ModelAttribute("user") @Valid UserVO user, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			logger.info("Binding Result has error!");
 			List<ObjectError> errors = bindingResult.getAllErrors();
 			for (ObjectError error : errors) {
 				logger.debug("error: {}", error.getDefaultMessage());
 			}
-			return "join.do";
+			return "join.jsp";
 		}
-		
-		userDAO.joinUser(vo);
+		userDAO.joinUser(user);
 		return "home.do";
 	}
 	
-	@RequestMapping("/login.do")
-	public String login(UserVO vo, Model model, HttpServletResponse response) throws IOException {
+	@RequestMapping("login.do")
+	public String login(@ModelAttribute("user") UserVO user) {
+		return "login.jsp";
+	}
+	
+	@RequestMapping("/loginProcess.do")
+	public String loginProcess(@ModelAttribute("user") @Valid UserVO user, 
+						       BindingResult bindingResult, Model model) throws IOException {
 		try {
-			userDAO.login(vo);
-			model.addAttribute("id", vo.getId());
+			if(bindingResult.hasErrors()) {
+				logger.info("Binding Result has error!");
+				List<ObjectError> errors = bindingResult.getAllErrors();
+				for (ObjectError error : errors) {
+					logger.debug("error: {}", error.getDefaultMessage());
+				}
+				return "login.jsp";
+			}
+			
+			userDAO.login(user);
+			model.addAttribute("id", user.getId());
 		} catch (IdNotMatchException e) {
 			logger.info(e.getMessage() + "");
 			model.addAttribute("msg", e.getMessage());
@@ -76,8 +90,16 @@ public class UserController {
 	}
 	
 	@RequestMapping("/update.do")
-	public String update(UserVO up) {
-		userDAO.updateUser(up);
+	public String update(@ModelAttribute("user") @Valid UserVO user, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			logger.info("Binding Result has error!");
+			List<ObjectError> errors = bindingResult.getAllErrors();
+			for (ObjectError error : errors) {
+				logger.debug("error: {}", error.getDefaultMessage());
+			}
+			return "join.jsp";
+		}
+		userDAO.updateUser(user);
 		return "home.do";
 	}
 }

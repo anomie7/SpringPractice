@@ -13,7 +13,7 @@
                     <li><a href="join.jsp">개인 정보 수정</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="login.jsp">로그인</a></li>
+                    <li><a href="login.do">로그인</a></li>
                     <li><a href="join.do">회원가입</a></li>
                 </c:otherwise>
                 </c:choose>
