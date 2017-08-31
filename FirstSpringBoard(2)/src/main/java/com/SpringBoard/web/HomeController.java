@@ -3,6 +3,7 @@ package com.SpringBoard.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//github.com/anomie7/SpringPractice.git
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+//github.com/anomie7/SpringPractice.git
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.SpringBoard.domain.UserVO;
