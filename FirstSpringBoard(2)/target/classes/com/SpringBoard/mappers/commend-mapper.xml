@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SpringBoard.mappers.CommendMapper">
+	<resultMap type="commend" id="commendResult">
+		<result property="boardId" column="boardid"/>
+		<result property="commendNum" column="commendnum"/>
+		<result property="content" column="content"/>
+		<result property="name" column="name"/>
+	</resultMap>
+	
+	<select id="getCommendList" parameterType="int" resultMap="commendResult">
+		select * from commend where boardid = #{id} order by commendnum desc
+	</select>
+	
+	<select id="getMaxCommendNum" parameterType="int" resultType="int">
+		select max(commendnum) FROM commend where boardid = #{boardid};
+	</select>
+	
+	<insert id="insertCommend" parameterType="commend">
+		insert into commend values(#{boardId}, #{commendNum}, #{content}, #{name})
+	</insert>
+
+</mapper>

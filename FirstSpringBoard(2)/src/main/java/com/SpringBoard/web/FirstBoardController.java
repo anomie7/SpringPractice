@@ -13,13 +13,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.SpringBoard.commend.dao.CommendDAO;
 import com.SpringBoard.domain.BoardVO;
+import com.SpringBoard.domain.CommendVO;
 import com.SpringBoard.model.BoardService;
 
 @Controller
 public class FirstBoardController {
 	@Autowired
 	BoardService boardService;
+	@Autowired
+	CommendDAO commendDAO;
 	private static final Logger logger = LoggerFactory.getLogger(FirstBoardController.class);
 
 	@RequestMapping("/getList.do")
@@ -36,6 +40,10 @@ public class FirstBoardController {
 		list = boardService.getSearchWriterAndContent(map);
 		
 		int totalList = boardService.getTotalCount(map);
+		if(totalList == 0) {   //검색 결과가 없을 떄
+			return "index.jsp";
+		}
+		
 		int totalpage = totalList / row - 1;
 		if((totalList % row) > 0) totalpage++;
 		logger.info("totalpage: {}", totalpage);
@@ -57,11 +65,17 @@ public class FirstBoardController {
 	}
 	
 	@RequestMapping("/boardRead.do")
-	public String getBoard(Model model, BoardVO vo) {
+	public String getBoard(Model model, BoardVO vo, 
+			@RequestParam(value ="nowpage", defaultValue = "0") int nowpage) {
 		BoardVO board = boardService.getBoard(vo.getId());
 		board.setCount(board.getCount() + 1);
 		boardService.modifyBoard(board);
+		
+		List<CommendVO> cl = commendDAO.getCommendList(board.getId());
+		model.addAttribute("cl", cl);
+		
 		model.addAttribute("board", board);
+		model.addAttribute("nowpage", nowpage);
 		return "board_read.jsp";
 	}
 	

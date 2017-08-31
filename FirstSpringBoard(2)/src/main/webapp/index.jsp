@@ -28,7 +28,7 @@
 				<c:forEach items="${boardList}" var="board">
 				<tr>
 					<td class="col-sm-1">${board.id}</td>
-					<td style="text-align:center"><a href="boardRead.do?id=${board.id}">${board.subject }</a></td>
+					<td style="text-align:center"><a href="boardRead.do?id=${board.id}&nowpage=${nowpage}">${board.subject}</a></td>
 					<td class="col-sm-2">${board.name}</td>
 					<td class="col-sm-2">${board.regDate}</td>
 					<td class="col-sm-1">${board.count}</td>
@@ -51,13 +51,13 @@
 				<li class="disabled"><a href="#">이전</a></li>
 				</c:when>
 				<c:otherwise>
-				<li><a href="getList.do?nowpage=${nowpage-1}&searchCondition=${vo.searchCondition}&searchKeyword=${vo.searchKeyword}"">이전</a></li>
+				<li><a href="getList.do?nowpage=${nowpage-1}&searchCondition=${vo.searchCondition}&searchKeyword=${vo.searchKeyword}">이전</a></li>
 				</c:otherwise>
 				</c:choose>
 				
 				<!--해당하는 페이지로 갈 수 있는 버튼  -->
 				<c:forEach var="i" begin="0" end="${totalpage}" >
-  				<li><a href="getList.do?nowpage=${i}&searchCondition=${vo.searchCondition}&searchKeyword=${vo.searchKeyword}"">${i+1}</a></li>
+  				<li><a href="getList.do?nowpage=${i}&searchCondition=${vo.searchCondition}&searchKeyword=${vo.searchKeyword}">${i+1}</a></li>
 				</c:forEach>
 				
 				<!--현재 페이지가 totalpage보다 커질 경우 다음 버튼을 disabled하는 조건문  -->
@@ -69,7 +69,7 @@
   				<li><a href="getList.do?nowpage=${nowpage+1}&searchCondition=${vo.searchCondition}&searchKeyword=${vo.searchKeyword}">다음</a></li>
   				</c:otherwise>
   				</c:choose>
-  				<li><a href="getList.do?nowpage=${totalpage}&searchCondition=${vo.searchCondition}&searchKeyword=${vo.searchKeyword}"">마지막</a></li>
+  				<li><a href="getList.do?nowpage=${totalpage}&searchCondition=${vo.searchCondition}&searchKeyword=${vo.searchKeyword}">마지막</a></li>
 			</ul>
 		</div>
 	</div>

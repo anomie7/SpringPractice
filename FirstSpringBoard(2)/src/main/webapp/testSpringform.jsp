@@ -5,16 +5,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>Insert title here</title>
+<script>
+	$(document).ready(function(){
+		$("button").click(function(){
+			$.ajax({
+				url: "testA.do",
+				data: { "id" : $("#id").val() },
+				type: "get",
+				success: function(result){
+					alert(result.id + " " +result.email + " " + result.tel);
+				}			
+			})
+		})
+	});
+</script>
 </head>
 <body>
-	<form:form commandName="user" action="testForm.do">
-		<form:input path="id"/>
-		<form:errors path="id"></form:errors>
-		<form:password path="password" showPassword="true"/>
-		<form:errors path="password"></form:errors>
-		<input type="submit" value="전송">
-	</form:form>
+	<form method="get">
+	<input type="text" name="id" id="id">
+	<input type="password" name="password" id="password">
+	</form>
 	<h1>${sessionScope.id }</h1>
+	<div><h1 id="a">안녕 ajax예제야</h1></div>
+	<button>하하</button>
 </body>
 </html>
