@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.SpringBoard.domain.CommendVO;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/root-context.xml")
 public class CommendDAOTest {
@@ -45,7 +44,6 @@ public class CommendDAOTest {
 		commend.setName("testCommend");
 		
 		logger.debug("생성되기 전 댓글의 값: {}", commend.toString());
-		
 		commendDAO.createCommend(commend);
 	}
 

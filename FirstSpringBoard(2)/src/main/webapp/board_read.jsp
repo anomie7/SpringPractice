@@ -23,9 +23,12 @@
 					data: { "name" : $("#comName").text(), "content" : $("#comContent").val(),
 							"boardId" : ${board.id} },
 					type: "post",
-					success: function(result){
-						alert(result);
-					}			
+					success: function(){
+						alert('성공적으로 댓글이 달렸어요.');
+					},
+					error: function(){
+						alert('댓글이 달리지 않았습니다.');
+					}
 				})
 			})
 		});
@@ -74,10 +77,16 @@
           <ul>
           	  <c:forEach var="commend" items="${cl}">
           	  <li style="width:650px;">
-                        <label for="cominput">${commend.name}</label>
-                        <span class="input-group" style="width:650px;">
-                            <textarea class="form-control" readonly="readonly">${commend.content}</textarea>
-                        </span>
+                    <label for="cominput">${commend.name}</label>
+                     <span class="input-group" style="width:650px;">
+                          <textarea class="form-control" readonly="readonly">${commend.content}</textarea>
+                     </span>
+                     <c:if test="${sessionScope.id eq commend.name}">
+                     <span class="btn-group col-md-offset-9">
+                        <button id="comUp" class="btn btn-primary">수정</button>
+                    	<button id="comDe" class="btn btn-primary">삭제</button>
+                     </span>
+                     </c:if>
               </li>
           	  </c:forEach>
               <li style="width:650px;">
@@ -87,7 +96,9 @@
                             <textarea class="form-control" id="comContent"></textarea>
                         </span>
                     </form>
-                    <button id="comBtn" class="btn btn-primary col-md-offset-11">전송</button>
+                    <span class="btn-group col-md-offset-9">
+                    <button id="comBtn" class="btn btn-primary">전송</button>
+                    </span>
               </li>
           </ul>
     </div>

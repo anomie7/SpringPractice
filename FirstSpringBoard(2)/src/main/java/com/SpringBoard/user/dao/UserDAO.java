@@ -14,7 +14,7 @@ public class UserDAO {
 	public void joinUser(UserVO vo) {
 		userMapper.insertUser(vo);
 	}
-	
+
 	public UserVO getUserById(String id) {
 		return userMapper.selectUser(id);
 	}
@@ -28,7 +28,7 @@ public class UserDAO {
 			} else {
 				throw new PasswordNotMatchException();
 			}
-		}else {
+		} else {
 			throw new IdNotMatchException();
 		}
 	}
@@ -36,8 +36,5 @@ public class UserDAO {
 	public void updateUser(UserVO up) {
 		userMapper.updateUser(up);
 	}
-	
-	
-	
-	
+
 }

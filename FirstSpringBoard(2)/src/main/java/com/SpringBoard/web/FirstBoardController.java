@@ -72,6 +72,9 @@ public class FirstBoardController {
 		boardService.modifyBoard(board);
 		
 		List<CommendVO> cl = commendDAO.getCommendList(board.getId());
+		for (CommendVO vo2 : cl) {
+			logger.debug(vo2.toString());
+		}
 		model.addAttribute("cl", cl);
 		
 		model.addAttribute("board", board);
@@ -97,4 +100,5 @@ public class FirstBoardController {
 		boardService.modifyBoard(vo);
 		return "redirect:/getList.do";
 	}
+	
 }

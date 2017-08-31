@@ -68,4 +68,5 @@
 	<bean id="boardService" class="com.SpringBoard.model.BoardServiceImpl"></bean>
 	<bean id="userDAO" class="com.SpringBoard.user.dao.UserDAO"></bean>
 	<bean id="commendDAO" class="com.SpringBoard.commend.dao.CommendDAO"></bean>
+	<bean id="userService" class="com.SpringBoard.user.dao.UserServiceImpl"></bean>
 </beans>

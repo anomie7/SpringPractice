@@ -5,6 +5,7 @@ public class CommendVO {
 	private int commendNum;
 	private String content;
 	private String name;
+	private int cno;
 
 	public int getBoardId() {
 		return boardId;
@@ -38,11 +39,18 @@ public class CommendVO {
 		this.name = name;
 	}
 
+	public int getCno() {
+		return cno;
+	}
+
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
+
 	@Override
 	public String toString() {
 		return "CommendVO [boardId=" + boardId + ", commendNum=" + commendNum + ", content=" + content + ", name="
-				+ name + "]";
+				+ name + ", cno=" + cno + "]";
 	}
-	
-	
+
 }

@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.SpringBoard.domain.UserVO;
-import com.SpringBoard.user.dao.UserDAO;
+import com.SpringBoard.user.dao.UserService;
 
 @Controller
 @SessionAttributes("id")
 public class HomeController {
 	@Autowired
-	UserDAO userDAO;
+	UserService userDAO;
 	
 	@RequestMapping("/home.do")
 	public String gohome() {

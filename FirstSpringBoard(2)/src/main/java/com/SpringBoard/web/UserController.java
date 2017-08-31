@@ -20,13 +20,13 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.SpringBoard.domain.UserVO;
 import com.SpringBoard.exceptions.IdNotMatchException;
 import com.SpringBoard.exceptions.PasswordNotMatchException;
-import com.SpringBoard.user.dao.UserDAO;
+import com.SpringBoard.user.dao.UserService;
 
 @Controller
 @SessionAttributes("id")
 public class UserController {
 	@Autowired
-	UserDAO userDAO;
+	UserService userService;
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@RequestMapping("/join.do")
@@ -44,7 +44,7 @@ public class UserController {
 			}
 			return "join.jsp";
 		}
-		userDAO.joinUser(user);
+		userService.joinUser(user);
 		return "home.do";
 	}
 	
@@ -66,7 +66,7 @@ public class UserController {
 				return "login.jsp";
 			}
 			
-			userDAO.login(user);
+			userService.login(user);
 			model.addAttribute("id", user.getId());
 		} catch (IdNotMatchException e) {
 			logger.info(e.getMessage() + "");
@@ -98,7 +98,7 @@ public class UserController {
 			}
 			return "join.jsp";
 		}
-		userDAO.updateUser(user);
+		userService.updateUser(user);
 		return "home.do";
 	}
 }

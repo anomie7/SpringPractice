@@ -4,6 +4,7 @@
 
 <mapper namespace="com.SpringBoard.mappers.CommendMapper">
 	<resultMap type="commend" id="commendResult">
+		<id property="cno" column="cno"/>
 		<result property="boardId" column="boardid"/>
 		<result property="commendNum" column="commendnum"/>
 		<result property="content" column="content"/>
@@ -19,7 +20,7 @@
 	</select>
 	
 	<insert id="insertCommend" parameterType="commend">
-		insert into commend values(#{boardId}, #{commendNum}, #{content}, #{name})
+		insert into commend(boardid, commendnum, content, name) values(#{boardId}, #{commendNum}, #{content}, #{name})
 	</insert>
 
 </mapper>

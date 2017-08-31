@@ -18,7 +18,7 @@ import com.SpringBoard.exceptions.PasswordNotMatchException;
 @ContextConfiguration("classpath:/root-context.xml")
 public class UserDAOTest {
 	@Autowired
-	UserDAO userDAO;
+	UserService userDAO;
 	UserVO vo;
 	private static final Logger logger = LoggerFactory.getLogger(UserDAOTest.class);
 
