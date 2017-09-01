@@ -30,4 +30,18 @@ public class CommendComtroller {
 		commendDAO.createCommend(commend);
 		return "success!";
 	}
+	
+	@RequestMapping("/commendDelete.do")
+	public String commendDelete(CommendVO commend){
+		logger.debug("삭제될 commend 객체의 cno : {}", commend.getCno());
+		commendDAO.deleteCommend(commend.getCno());
+		return "success!";
+	}
+	
+	@RequestMapping(value = "/commendUpdate.do")
+	public String commendUpdate(CommendVO commend) {
+		logger.debug("수정될 commend 객체 : {}", commend.toString());
+		commendDAO.updateCommend(commend);
+		return "success!";
+	}
 }

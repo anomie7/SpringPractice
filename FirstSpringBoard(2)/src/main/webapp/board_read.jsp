@@ -4,6 +4,7 @@
 <%@include file="commons/top.jsp" %>
     <style>
     	pre {border: 0; background-color: transparent;}
+    	
     	ul {
     		list-style: none;
     	}
@@ -25,6 +26,8 @@
 					type: "post",
 					success: function(){
 						alert('성공적으로 댓글이 달렸어요.');
+						$("#comContent").val("");
+						location.reload();
 					},
 					error: function(){
 						alert('댓글이 달리지 않았습니다.');
@@ -33,12 +36,67 @@
 			})
 		});
 		
-		/* $(document).ready(function(){
-			$("#comBtn").click(function(){
-				
+		//수정 버튼을 누르면 밑에 작성 폼이 사라지면서 수정 폼이 나타나고 hidden input 태그에 수정 버튼을 누른 commend에 cno를 넣어준다.
+		$(document).ready(function(){
+			$(".comUp").click(function(){
+				$("#upContent").val("");
+				$("#cno2").val( $(this).val() );   
+				$("#writerLi").css("display", "none");
+				$("#hid").css("display", "");
 			})
-		}); */
+		});
 		
+		//수정 ajax 함수
+		$(document).ready(function(){
+			$("#upbtn").click(function(){
+				$.ajax({
+					url: "commendUpdate.do",
+					data: { "cno" : $("#cno2").val(), "content" : $("#upContent").val() },
+					type: "post",
+					success: function(){
+						alert("성공적으로 수정되었습니다.");
+						$("#hid").css("display", "none");
+						$("#upContent").val("");
+						$("#writerLi").css("display", "");
+						location.reload();
+					},
+					error: function(){
+						alert("수정 되지 않았어요. 어떻하죠?");
+					}
+				})
+			})
+		});
+		
+		//삭제하는 ajax 함수
+		$(document).ready(function(){
+			$(".comDe").click(function(){
+				
+				if(!confirm("정말 삭제하시겠어요?")){
+					return;
+				}
+				
+				$.ajax({
+					url: "commendDelete.do",
+					data: { "cno" : $(this).val() },
+					type: "post",
+					success: function(){
+						alert("성공적으로 삭제되었어요.");
+						location.reload();
+					},
+					error: function(){
+					alert("삭제되지 않았어요!");
+					}
+				})
+			})
+		});
+		
+		$(document).ready(function(){
+			$("#cencle").click(function(){
+				$("#hid").css("display", "none");
+				$("#upContent").val("");
+				$("#writerLi").css("display", "");
+			})
+		})
 	</script>
 </head>
 <body>
@@ -46,7 +104,7 @@
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
             <div style="padding-bottom: 30px;">
-                <h1>글조회</h1>
+                <h1>글 조회</h1>
             </div>
             <table class="table table-condensed">
                 <tr>
@@ -79,17 +137,18 @@
           	  <li style="width:650px;">
                     <label for="cominput">${commend.name}</label>
                      <span class="input-group" style="width:650px;">
-                          <textarea class="form-control" readonly="readonly">${commend.content}</textarea>
+                          <textarea  class="form-control" readonly="readonly">${commend.content}</textarea>
                      </span>
                      <c:if test="${sessionScope.id eq commend.name}">
                      <span class="btn-group col-md-offset-9">
-                        <button id="comUp" class="btn btn-primary">수정</button>
-                    	<button id="comDe" class="btn btn-primary">삭제</button>
+                        <button class="comUp btn btn-xs btn-primary" value="${commend.cno}">수정</button>
+                    	<button class="comDe btn btn-xs btn-primary" value="${commend.cno}">삭제</button>
                      </span>
                      </c:if>
               </li>
           	  </c:forEach>
-              <li style="width:650px;">
+          	  <c:if test="${not empty id }">
+              <li id="writerLi" style="width:650px;">
                     <form class="form-gruop" style="width:650px;">
                         <label for="cominput" id="comName">${id}</label>
                         <span class="input-group" style="width:650px;">
@@ -100,6 +159,20 @@
                     <button id="comBtn" class="btn btn-primary">전송</button>
                     </span>
               </li>
+          	  </c:if>
+          	  <li id="hid" style="display: none">
+          	  	  <form class="form-gruop" style="width:650px;">
+                        <label for="cominput" id="comName">${id}</label>
+                        <span class="input-group" style="width:650px;">
+                            <textarea class="form-control" id="upContent"></textarea>
+                        </span>
+                    </form>
+                    <span class="btn-group col-md-offset-7">
+	                    <input type="hidden" id="cno2" name = "cno" value="">
+	                    <button id="upbtn" class="btn btn-primary">수정</button>
+	                    <button id="cencle" class="btn btn-primary">취소</button>
+                    </span>
+          	  </li>
           </ul>
     </div>
 </body>

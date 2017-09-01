@@ -10,4 +10,8 @@ public interface CommendMapper {
 	Integer getMaxCommendNum(Integer boardId);
 
 	void insertCommend(CommendVO commend);
+
+	void updateCommend(CommendVO vo);
+
+	void deleteCommend(int cno);
 }

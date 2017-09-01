@@ -22,5 +22,13 @@
 	<insert id="insertCommend" parameterType="commend">
 		insert into commend(boardid, commendnum, content, name) values(#{boardId}, #{commendNum}, #{content}, #{name})
 	</insert>
+	
+	<update id="updateCommend" parameterType="commend">
+		update commend set content = #{content} where cno = #{cno}
+	</update>
+	
+	<delete id="deleteCommend" parameterType="int">
+		delete from commend where cno = #{cno}
+	</delete>
 
 </mapper>

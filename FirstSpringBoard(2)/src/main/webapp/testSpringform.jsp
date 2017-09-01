@@ -12,7 +12,7 @@
 		$("button").click(function(){
 			$.ajax({
 				url: "testA.do",
-				data: { "id" : $("#id").val() },
+				data: { "id" : $("#id").val(),  },
 				type: "get",
 				success: function(result){
 					alert(result.id + " " +result.email + " " + result.tel);

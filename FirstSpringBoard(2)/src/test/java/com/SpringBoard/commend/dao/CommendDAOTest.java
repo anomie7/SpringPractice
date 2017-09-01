@@ -30,7 +30,9 @@ public class CommendDAOTest {
 	@Test
 	public void createCommendTest() throws Exception {
 		CommendVO commend = new CommendVO();
-		commend.setBoardId(2);
+		commend.setBoardId(1);
+		commend.setContent("테스트가 정상적으로 될까?");
+		commend.setName("테스");
 		Integer maxNum = commendDAO.getMaxCommendNum(commend.getBoardId() );
 		logger.debug("maxNum : {}", maxNum);
 		
@@ -40,11 +42,24 @@ public class CommendDAOTest {
 			commend.setCommendNum(++maxNum);
 		}
 		
-		commend.setContent("댓글이다 댓글이야");
-		commend.setName("testCommend");
-		
 		logger.debug("생성되기 전 댓글의 값: {}", commend.toString());
 		commendDAO.createCommend(commend);
+	}
+	
+	@Test
+	public void updateCommendTest() throws Exception {
+		CommendVO vo = new CommendVO();
+		vo.setCno(11);
+		vo.setContent("테스트 성공");
+		
+		commendDAO.updateCommend(vo);
+	}
+	
+	@Test
+	public void deleteCommendTest() throws Exception {
+		CommendVO vo = new CommendVO();
+		vo.setCno(11);
+		commendDAO.deleteCommend(vo.getCno());
 	}
 
 }

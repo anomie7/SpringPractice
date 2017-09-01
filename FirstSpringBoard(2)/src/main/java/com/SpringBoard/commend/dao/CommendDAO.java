@@ -22,4 +22,12 @@ public class CommendDAO {
 	public void createCommend(CommendVO commend) {
 		commendMapper.insertCommend(commend);
 	}
+
+	public void updateCommend(CommendVO vo) {
+		commendMapper.updateCommend(vo);
+	}
+
+	public void deleteCommend(int cno) {
+		commendMapper.deleteCommend(cno);
+	}
 }
