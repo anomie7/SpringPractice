@@ -2,8 +2,8 @@ package com.SpringBoard.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,29 +29,12 @@ public class FirstBoardController {
 	@RequestMapping("/getList.do")
 	public String home(Model model, BoardVO board,
 			@RequestParam(value ="nowpage", defaultValue = "0") int nowpage) {
-		int row = 3;
-		int startpoint = nowpage * row;
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put(board.getSearchCondition(), "%"+ board.getSearchKeyword() + "%");
-		map.put("startpoint", startpoint);
-		map.put("row", row);
-		List<BoardVO> list;
-		list = boardService.getSearchWriterAndContent(map);
-		
-		int totalList = boardService.getTotalCount(map);
-		if(totalList == 0) {   //검색 결과가 없을 떄
+		Map<String, Object> map = boardService.getSearchWriterAndContent(board, nowpage);
+		if(map.isEmpty()) {
 			return "index.jsp";
 		}
 		
-		int totalpage = totalList / row - 1;
-		if((totalList % row) > 0) totalpage++;
-		logger.info("totalpage: {}", totalpage);
-		
-		model.addAttribute("boardList",list);
-		model.addAttribute("nowpage",nowpage);
-		model.addAttribute("totalpage", totalpage);
-		model.addAttribute("vo", board);
+		model.addAllAttributes(map);
 		return "index.jsp";
 	}
 	

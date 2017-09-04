@@ -2,6 +2,7 @@ package com.SpringBoard.model;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.SpringBoard.domain.BoardVO;
 
@@ -19,6 +20,6 @@ public interface BoardService {
 	
 	public int getTotalCount(HashMap<String, Object> map);
 
-	List<BoardVO> getSearchWriterAndContent(HashMap<String, Object> map);
+	Map<String, Object> getSearchWriterAndContent(BoardVO board, int nowpage);
 
 }

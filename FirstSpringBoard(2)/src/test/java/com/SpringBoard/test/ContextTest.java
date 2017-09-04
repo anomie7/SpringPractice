@@ -81,16 +81,16 @@ public class ContextTest {
 		int totallist = boardService.getTotalCount(map);
 		logger.info(totallist + "");
 	}
-	@Test
-	public void SearchWriterAndContentTest() throws Exception {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("startpoint", 1);
-		map.put("row", 3);
-		
-		List<BoardVO> list = boardService.getSearchWriterAndContent(map);
-		for (BoardVO vo : list) {
-			logger.info(vo.toString());
-		}
-	}
+//	@Test
+//	public void SearchWriterAndContentTest() throws Exception {
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("startpoint", 1);
+//		map.put("row", 3);
+//		
+//		List<BoardVO> list = boardService.getSearchWriterAndContent(map);
+//		for (BoardVO vo : list) {
+//			logger.info(vo.toString());
+//		}
+//	}
 
 }
