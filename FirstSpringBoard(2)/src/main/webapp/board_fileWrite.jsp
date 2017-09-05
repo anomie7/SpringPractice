@@ -22,7 +22,7 @@ function writerCheck(f){
                 <h1>글쓰기 화면</h1>
             </div>
             <div>
-                <form class="form-group" name="f1" id="f1" action="fileUpload.do" method="post" enctype="multipart/form-data" onsubmit="return writerCheck(this)">
+                <form class="form-group" name="f1" id="f1" action="FileWrite.do" method="post" enctype="multipart/form-data" onsubmit="return writerCheck(this)">
                 <table class="table table-striped row">
                     <tr>
                         <th class="col-md-2">작성자</th>

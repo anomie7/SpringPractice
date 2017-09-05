@@ -8,10 +8,12 @@
 		<typeAlias type="com.SpringBoard.domain.BoardVO" alias="board"></typeAlias>
 		<typeAlias type="com.SpringBoard.domain.UserVO" alias="user"/>
 		<typeAlias type="com.SpringBoard.domain.CommendVO" alias="commend"/>
+		<typeAlias type="com.SpringBoard.domain.FileVO" alias="file"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/SpringBoard/mappers/Mapper.xml" />
 		<mapper resource="com/SpringBoard/mappers/user-mapper.xml"/>
 		<mapper resource="com/SpringBoard/mappers/commend-mapper.xml"/>
+		<mapper resource="com/SpringBoard/mappers/file-mapper.xml"/>
 	</mappers>
 </configuration>

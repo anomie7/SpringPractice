@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SpringBoard.mappers.FileMapper">
+
+	<resultMap type="board" id="fileBoardResult">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="count" column="count" />
+		<result property="regdate" column="regdate" />
+		<result property="subject" column="subject" />
+		<result property="content" column="content" />
+	</resultMap>
+
+	<resultMap type="file" id="fileResult">
+		<id property="fno" column="fno" />
+		<result property="boardId" column="boardid" />
+		<result property="fileSize" column="filesize" />
+		<result property="StoredFileName" column="storedfilename" />
+		<result property="OriginalFileName" column="originalfilename" />
+	</resultMap>
+
+	<insert id="insertFileBoard" useGeneratedKeys="true"
+		keyProperty="id" parameterType="board">
+		INSERT INTO fileboard (id,
+		name, count,
+		regdate, subject, content)
+		VALUES(#{id},#{name}, #{count}, #{regdate},
+		#{subject},
+		#{content})
+	</insert>
+
+	<insert id="insertFile" parameterType="file">
+		INSERT INTO file (boardid,
+		filesize, storedfilename, originalfilename)
+		VALUES(#{boardId}, #{fileSize}, #{StoredFileName}, #{OriginalFileName})
+	</insert>
+
+	<select id="selectFileBoard" parameterType="int" resultMap="fileBoardResult">
+		select * from fileboard where id = #{id}
+	</select>
+
+	<select id="selectFile" parameterType="int" resultMap="fileResult">
+		select *
+		from file where boardid = #{boardId}
+	</select>
+	
+</mapper>

@@ -46,6 +46,11 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
 	
+	<bean id="fileMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.SpringBoard.mappers.FileMapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
 	
 	<!--스프링 빈 설정을 어노테이션으로 해주겠다는 엘리먼트입니다. 
 		위의 예처럼 <property>나 <constructor-arg> 엘리먼트를 사용해서 의존성을 주입해주기도 하지만
@@ -70,4 +75,5 @@
 	<bean id="userDAO" class="com.SpringBoard.user.dao.UserDAO"></bean>
 	<bean id="commendDAO" class="com.SpringBoard.commend.dao.CommendDAO"></bean>
 	<bean id="userService" class="com.SpringBoard.user.dao.UserServiceImpl"></bean>
+	<bean id="fileDAO" class="com.SpringBoard.file.dao.FileDAO"></bean>
 </beans>
