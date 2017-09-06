@@ -2,6 +2,7 @@ package com.SpringBoard.web;
 
 //github.com/anomie7/SpringPractice.git
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 //github.com/anomie7/SpringPractice.git
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -13,10 +14,10 @@ public class HomeController {
 //	@Autowired
 //	UserService userDAO;
 //
-//	@RequestMapping("/home.do")
-//	public String gohome() {
-//		return "home.jsp";
-//	}
+	@RequestMapping("/home.do")
+	public String gohome() {
+		return "home.jsp";
+	}
 //
 //	@RequestMapping("/testForm.do")
 //	public String goTestPage() {

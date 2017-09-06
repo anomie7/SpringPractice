@@ -47,4 +47,5 @@ public class BoardDAO {
 	public int getTotalCount(HashMap<String, Object> map) {
 		return boardMapper.findTotalCount(map);
 	}
+	
 }

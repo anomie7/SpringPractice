@@ -67,4 +67,6 @@
 		delete from board where
 		id = #{id}
 	</delete>
+	
+	
 </mapper>

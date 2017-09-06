@@ -13,7 +13,7 @@
 		function deleteChk(){
 			var isdel = confirm("정말 삭제하시겠어요?");
 			if(isdel == true){
-				location.href = "deleteBoard.do?id=${board.id}";
+				location.href = "deletefile.do?id=${board.id}";
 			}
 		}
 		
@@ -119,7 +119,7 @@
                 </tr>
                 <tr>
                 	<th>첨부파일</th>
-                	<td><a href="downloadFile.do?id=${board.id}">${file.originalFileName}</a></td>
+                	<td colspan="3"><a href="downloadFile.do?id=${board.id}">${file.originalFileName}</a></td>
                 </tr>
                 <tr>
                     <th>내용</th>
@@ -127,9 +127,9 @@
                 </tr>
             </table>
             <span class="btn-group col-xs-offset-9">
-                    <a href="getList.do?nowpage=${nowpage}" class="btn btn-default">목록</a>
+                    <a href="getFileList.do?nowpage=${nowpage}" class="btn btn-default">목록</a>
                     <c:if test="${board.name eq sessionScope.id}">
-                    <a href="boardUpdate.do?id=${board.id}" class="btn btn-default">수정</a>
+                    <a href="updatefile.do?id=${board.id}" class="btn btn-default">수정</a>
                     <a class="btn btn-default" href="javascript:deleteChk()">삭제</a>
                     </c:if>
                 </span>

@@ -46,4 +46,48 @@
 		from file where boardid = #{boardId}
 	</select>
 	
+	<select id="getSearchWriterAndContent" parameterType="HashMap" resultMap="fileBoardResult">
+		select *from fileboard
+		<where>
+		<if test="content != null">
+		content like #{content} 
+		</if>
+		
+		<if test="writer != null">
+		AND name like #{writer}
+		</if>
+		</where>
+		<if test="true">
+		order by id desc limit #{startpoint}, #{row}
+		</if>
+	</select>
+	
+	<select id="findTotalCount" parameterType="HashMap" resultType="int">
+		select count(*) from fileboard 
+		
+		<where>
+		<if test="content != null">
+		content like #{content} 
+		</if>
+		
+		<if test="writer != null">
+		AND name like #{writer}
+		</if>
+		</where>
+	</select>
+	
+	<update id="modifyBoard" parameterType="board">
+		update fileboard set subject
+		= #{subject}, content = #{content}, count = #{count} where id = #{id}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+		delete from fileboard where
+		id = #{id}
+	</delete>
+	
+	<delete id="deleteFile" parameterType="int">
+		delete from file where fno = #{fno}
+	</delete>
+	
 </mapper>

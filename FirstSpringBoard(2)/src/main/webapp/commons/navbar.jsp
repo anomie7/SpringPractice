@@ -18,6 +18,7 @@
                 </c:otherwise>
                 </c:choose>
                     <li><a href="getList.do">게시판</a></li>
+                    <li><a href="getFileList.do">자료실</a></li>
                 </ul>
             </div>
         </nav>

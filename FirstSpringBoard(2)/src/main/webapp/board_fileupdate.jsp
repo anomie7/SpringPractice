@@ -22,7 +22,7 @@ function writerCheck(f){
                 <h1>수정 화면</h1>
             </div>
             <div>
-                <form class="form-group" action="updateProcess.do" method="post" onsubmit="return writerCheck(this)">
+                <form class="form-group" action="fileUpdateProcess.do" method="post" enctype="multipart/form-data" onsubmit="return writerCheck(this)">
                 <table class="table table-striped row">
                     <tr>
                         <th class="col-md-2">작성자</th>
@@ -32,6 +32,12 @@ function writerCheck(f){
                         <th>제목</th>
                         <td><input class="form-control" id="sub" type="text" name="subject" value="${board.subject}"></td>
                     </tr>
+                    <c:if test="${empty file.fno}">
+                    <tr>
+                    	<th>첨부파일</th>
+                   		<td><input name="file" type="file"></td>
+                    </tr>
+                    </c:if>
                     <tr>
                         <th>내용</th>
                         <td><textarea class="form-control" id="con" name="content" rows="10">${board.content}</textarea></td>
@@ -46,10 +52,26 @@ function writerCheck(f){
                 </table>
             </form>
             </div>
+            <c:if test="${not empty file.fno }">
+            <div>
+            <form action="fileDelete.do" method="post">
+            <div class="page-header">
+            	<h4>첨부파일</h4>
             </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="fno" value="${file.fno}">${file.originalFileName}</label>
+                    <input type="hidden" name="id" value="${board.id}">
+                </div>
+                <div>
+                	<button class="btn btn-xs btn-primary">삭제</button>
+                </div>
+            </form>
+            </div>
+            </c:if>
             <div class="btn-group col-md-offset-9">
-              <a href="getList.do" class="btn btn-default">목록</a>
+              <a href="getFileList.do" class="btn btn-default">목록</a>
             </div>
+        </div>
         </div>
     </body>
 </html>
