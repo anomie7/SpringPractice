@@ -19,7 +19,7 @@ import com.SpringBoard.domain.FileVO;
 @ContextConfiguration("classpath:/root-context.xml")
 public class FileDAOTest {
 	@Autowired
-	FileDAO fileDAO;
+	FileService fileDAO;
 	BoardVO bvo;
 	FileVO fvo;
 	private static final Logger logger = LoggerFactory.getLogger(FileDAOTest.class);
@@ -41,11 +41,11 @@ public class FileDAOTest {
 		fvo.setStoredFileName(UUID.randomUUID().toString().replace("-", ""));
 	}
 	
-	@Test
-	public void insertFileTest() {
-		fileDAO.insertFileBoard(bvo);
-		fileDAO.insertFile(fvo);
-	}
+//	@Test
+//	public void insertFileTest() {
+//		fileDAO.insertFileBoard(bvo);
+//		fileDAO.insertFile(fvo);
+//	}
 	
 	@Test
 	public void selectTest() throws Exception {

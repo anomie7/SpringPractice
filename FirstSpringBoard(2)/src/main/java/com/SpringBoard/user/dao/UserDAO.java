@@ -9,7 +9,7 @@ import com.SpringBoard.mappers.UserMapper;
 
 public class UserDAO {
 	@Autowired
-	UserMapper userMapper;
+	private UserMapper userMapper;
 
 	public void joinUser(UserVO vo) {
 		userMapper.insertUser(vo);

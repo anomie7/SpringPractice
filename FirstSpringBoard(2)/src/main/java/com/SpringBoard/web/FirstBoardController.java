@@ -1,19 +1,15 @@
 package com.SpringBoard.web;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.SpringBoard.commend.dao.CommendDAO;
+import com.SpringBoard.commend.dao.CommendService;
 import com.SpringBoard.domain.BoardVO;
 import com.SpringBoard.domain.CommendVO;
 import com.SpringBoard.model.BoardService;
@@ -23,65 +19,54 @@ public class FirstBoardController {
 	@Autowired
 	BoardService boardService;
 	@Autowired
-	CommendDAO commendDAO;
-	private static final Logger logger = LoggerFactory.getLogger(FirstBoardController.class);
+	CommendService commendDAO;
 
 	@RequestMapping("/getList.do")
-	public String home(Model model, BoardVO board,
-			@RequestParam(value ="nowpage", defaultValue = "0") int nowpage) {
+	public String home(Model model, BoardVO board, @RequestParam(value = "nowpage", defaultValue = "0") int nowpage) {
 		Map<String, Object> map = boardService.getSearchWriterAndContent(board, nowpage);
-		if(map.isEmpty()) {
+		if (map.isEmpty()) {
 			return "index.jsp";
 		}
-		
 		model.addAllAttributes(map);
 		return "index.jsp";
 	}
-	
+
 	@RequestMapping("/boardWrite.do")
 	public String boardWrite(BoardVO vo) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		String regDate = sdf.format(new Date());
-		vo.setRegDate(regDate);
 		boardService.createBoard(vo);
 		return "redirect:/getList.do";
 	}
-	
+
 	@RequestMapping("/boardRead.do")
-	public String getBoard(Model model, BoardVO vo, 
-			@RequestParam(value ="nowpage", defaultValue = "0") int nowpage) {
+	public String getBoard(Model model, BoardVO vo, @RequestParam(value = "nowpage", defaultValue = "0") int nowpage) {
 		BoardVO board = boardService.getBoard(vo.getId());
 		board.setCount(board.getCount() + 1);
 		boardService.modifyBoard(board);
-		
+
 		List<CommendVO> cl = commendDAO.getCommendList(board.getId());
-		for (CommendVO vo2 : cl) {
-			logger.debug(vo2.toString());
-		}
-		model.addAttribute("cl", cl);
 		
+		model.addAttribute("cl", cl);
 		model.addAttribute("board", board);
 		model.addAttribute("nowpage", nowpage);
 		return "board_read.jsp";
 	}
-	
+
 	@RequestMapping("/deleteBoard.do")
 	public String deleteBoard(BoardVO vo) {
 		boardService.deleteBoard(vo.getId());
 		return "redirect:/getList.do";
 	}
-	
+
 	@RequestMapping("/boardUpdate.do")
 	public String getBoardForUpdate(Model model, BoardVO vo) {
-		BoardVO board = boardService.getBoard(vo.getId());
-		model.addAttribute("board" ,board);
+		model.addAttribute("board", boardService.getBoard(vo.getId()) );
 		return "board_update.jsp";
 	}
-	
+
 	@RequestMapping("/updateProcess.do")
 	public String updateProcess(BoardVO vo) {
 		boardService.modifyBoard(vo);
 		return "redirect:/getList.do";
 	}
-	
+
 }

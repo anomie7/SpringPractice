@@ -1,5 +1,7 @@
 package com.SpringBoard.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,38 +16,40 @@ public class BoardDAO {
 	@Autowired
 	BoardMapper boardMapper;
 	private static final Logger logger = LoggerFactory.getLogger(BoardDAO.class);
-	
+
 	public BoardDAO() {
 		logger.debug("DAO 객체생성");
 	}
-	
+
 	public void createBoard(BoardVO vo) {
-			boardMapper.insertBoard(vo);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String regDate = sdf.format(new Date());
+		vo.setRegDate(regDate);
+		boardMapper.insertBoard(vo);
 	}
 
 	public BoardVO getBoard(int id) {
-			return boardMapper.findBoardById(id);
+		return boardMapper.findBoardById(id);
 	}
 
 	public List<BoardVO> getBoardList() {
-			return boardMapper.findAllBoard();
+		return boardMapper.findAllBoard();
 	}
 
 	public void modifyBoard(BoardVO vo) {
-			boardMapper.modifyBoard(vo);
+		boardMapper.modifyBoard(vo);
 	}
 
 	public void deleteBoard(int id) {
-			boardMapper.deleteBoard(id);
-		}
-	
+		boardMapper.deleteBoard(id);
+	}
 
 	public List<BoardVO> getSearchWriterAndContent(HashMap<String, Object> map) {
 		return boardMapper.getSearchWriterAndContent(map);
 	}
-	
+
 	public int getTotalCount(HashMap<String, Object> map) {
 		return boardMapper.findTotalCount(map);
 	}
-	
+
 }

@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.SpringBoard.domain.CommendVO;
 import com.SpringBoard.mappers.CommendMapper;
 
-public class CommendDAO {
+public class CommendDAO{
 	@Autowired
-	CommendMapper commendMapper;
+	private CommendMapper commendMapper;
 	
 	public List<CommendVO> getCommendList(int id){
 		return commendMapper.getCommendList(id);

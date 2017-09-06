@@ -12,6 +12,17 @@ function writerCheck(f){
 		return false;
 	}
 }
+
+$(document).ready(function(){
+	$("#delFile").on("submit", function(event){
+		var isDelete = confirm("파일을 삭제 하시겠습니까?");
+		if(isDelete){
+			alert("삭제되었습니다.");
+		}else{
+			event.preventDefault();
+		}
+	})
+});
 </script>
 </head>
     <body>
@@ -54,7 +65,7 @@ function writerCheck(f){
             </div>
             <c:if test="${not empty file.fno }">
             <div>
-            <form action="fileDelete.do" method="post">
+            <form id="delFile" action="fileDelete.do" method="post">
             <div class="page-header">
             	<h4>첨부파일</h4>
             </div>

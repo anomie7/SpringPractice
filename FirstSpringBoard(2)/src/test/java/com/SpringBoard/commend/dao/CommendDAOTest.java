@@ -16,7 +16,7 @@ import com.SpringBoard.domain.CommendVO;
 @ContextConfiguration("classpath:/root-context.xml")
 public class CommendDAOTest {
 	@Autowired
-	CommendDAO commendDAO;
+	CommendService commendDAO;
 	private static final Logger logger = LoggerFactory.getLogger(CommendDAOTest.class);
 
 	@Test

@@ -69,11 +69,12 @@
 	애노테이션을 통해서 빈 등록을 해줘도 되지만 설정 파일에 등록해주는 것이 빈을 관리하기에는 더 편합니다.  
 	우리는 빈 등록은 <bean> 엘리먼트로 하고 의존성 주입은 애노테이션을 이용할 거에요.
 	-->
-	<bean id="board" class="com.SpringBoard.domain.BoardVO"></bean>
 	<bean id="boardDAO" class="com.SpringBoard.model.BoardDAO"></bean>
 	<bean id="boardService" class="com.SpringBoard.model.BoardServiceImpl"></bean>
 	<bean id="userDAO" class="com.SpringBoard.user.dao.UserDAO"></bean>
-	<bean id="commendDAO" class="com.SpringBoard.commend.dao.CommendDAO"></bean>
 	<bean id="userService" class="com.SpringBoard.user.dao.UserServiceImpl"></bean>
+	<bean id="commendDAO" class="com.SpringBoard.commend.dao.CommendDAO"></bean>
+	<bean id="commendService" class="com.SpringBoard.commend.dao.CommendServiceImpl"></bean>
 	<bean id="fileDAO" class="com.SpringBoard.file.dao.FileDAO"></bean>
+	<bean id="fileService" class="com.SpringBoard.file.dao.FileServiceImpl"></bean>
 </beans>
