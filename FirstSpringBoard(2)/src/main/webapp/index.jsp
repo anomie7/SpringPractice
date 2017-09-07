@@ -30,7 +30,7 @@
 					<td class="col-sm-1">${board.id}</td>
 					<td style="text-align:center"><a href="boardRead.do?id=${board.id}&nowpage=${nowpage}">${board.subject}</a></td>
 					<td class="col-sm-2">${board.name}</td>
-					<td class="col-sm-2">${board.regDate}</td>
+					<td class="col-sm-2">${board.regdate}</td>
 					<td class="col-sm-1">${board.count}</td>
 				</tr>
 				</c:forEach>

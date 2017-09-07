@@ -24,7 +24,7 @@ public class BoardDAO {
 	public void createBoard(BoardVO vo) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String regDate = sdf.format(new Date());
-		vo.setRegDate(regDate);
+		vo.setRegdate(regDate);
 		boardMapper.insertBoard(vo);
 	}
 

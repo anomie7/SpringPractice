@@ -24,7 +24,7 @@ public class FileServiceImpl implements FileService {
 	public void insertFileBoard(BoardVO board, FileVO fvo, HttpServletRequest request) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String regDate = sdf.format(new Date());
-		board.setRegDate(regDate);
+		board.setRegdate(regDate);
 		fileDAO.insertFileBoard(board);
 		insertFile(board, fvo, request);
 	}

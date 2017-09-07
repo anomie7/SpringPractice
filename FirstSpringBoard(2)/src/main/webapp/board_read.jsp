@@ -115,7 +115,7 @@
                     <th>작성자</th>
                     <td>${board.name}</td>
                     <th>작성일</th>
-                    <td>${board.regDate}</td>
+                    <td>${board.regdate}</td>
                 </tr>
                 <tr>
                     <th>내용</th>
