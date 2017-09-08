@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<%@include file="commons/top.jsp" %>
+<%@include file="../commons/top.jsp" %>
 </head>
 <body>
-  <%@include file="commons/navbar.jsp" %>
+  <%@include file="../commons/navbar.jsp" %>
 	<div class="container row">
 		<div class="col-sm-offset-9">
                 <form action="getList.do" method="get">

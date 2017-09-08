@@ -1,6 +1,6 @@
 package com.SpringBoard.exceptions;
 
-public class PasswordNotMatchException extends Exception {
+public class PasswordNotMatchException extends LoginException {
 	/**
 	 * 
 	 */

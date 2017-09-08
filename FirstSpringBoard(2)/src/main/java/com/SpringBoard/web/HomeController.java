@@ -16,7 +16,7 @@ public class HomeController {
 //
 	@RequestMapping("/home.do")
 	public String gohome() {
-		return "home.jsp";
+		return "home";
 	}
 //
 //	@RequestMapping("/testForm.do")

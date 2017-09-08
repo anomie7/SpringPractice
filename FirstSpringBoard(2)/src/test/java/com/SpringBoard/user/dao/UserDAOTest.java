@@ -10,8 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.SpringBoard.domain.UserVO;
-import com.SpringBoard.exceptions.IdNotMatchException;
-import com.SpringBoard.exceptions.PasswordNotMatchException;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -40,9 +38,7 @@ public class UserDAOTest {
 	public void loginTest() {
 		try {
 			userDAO.login(vo);
-		} catch (IdNotMatchException e) {
-			logger.info(e.getMessage());
-		}catch(PasswordNotMatchException e) {
+		} catch (com.SpringBoard.exceptions.LoginException e) {
 			logger.info(e.getMessage());
 		}catch(Exception e) {
 			logger.info(e.getMessage());

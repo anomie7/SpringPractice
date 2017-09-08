@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="commons/top.jsp" %>
+<%@include file="../commons/top.jsp" %>
 <script>
 function writerCheck(f){
 	if(f.sub.value == ''){
@@ -26,7 +26,7 @@ $(document).ready(function(){
 </script>
 </head>
     <body>
-        <%@include file="commons/navbar.jsp" %>
+        <%@include file="../commons/navbar.jsp" %>
         <div class="container">
             <div class="col-md-7 col-md-offset-2">
             <div class="page-hearder" style="padding-bottom: 20px;">

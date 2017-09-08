@@ -33,17 +33,17 @@ public class FileBoardController {
 			@RequestParam(value = "nowpage", defaultValue = "0") int nowpage) {
 		Map<String, Object> map = fileService.getSearchWriterAndContent(board, nowpage);
 		if (map.isEmpty()) {
-			return "fileIndex.jsp";
+			return "file/ileIndex";
 		}
 
 		model.addAllAttributes(map);
-		return "fileIndex.jsp";
+		return "file/fileIndex";
 	}
 
 	@RequestMapping("FileWrite.do")
 	public String fileWrite(BoardVO vo, FileVO fvo, HttpServletRequest request) {
 		fileService.insertFileBoard(vo, fvo, request);
-		return "getFileList.do";
+		return "redirect:getFileList.do";
 	}
 
 	@RequestMapping("/fileboardRead.do")
@@ -58,7 +58,7 @@ public class FileBoardController {
 		model.addAttribute("cl", cl);
 		model.addAttribute("file", fvo);
 		model.addAttribute("board", board);
-		return "board_fileRead.jsp";
+		return "file/board_fileRead";
 	}
 
 	@RequestMapping("/downloadFile.do")
@@ -94,21 +94,21 @@ public class FileBoardController {
 
 		model.addAttribute("file", fvo);
 		model.addAttribute("board", board);
-		return "board_fileupdate.jsp";
+		return "file/board_fileupdate";
 	}
 
 	@RequestMapping("/fileUpdateProcess.do")
 	public String updateProcess(BoardVO vo, FileVO fvo, HttpServletRequest request) {
 		fileService.modifyBoard(vo);
 		fileService.insertFile(vo, fvo, request);
-		return "getFileList.do";
+		return "redirect:getFileList.do";
 	}
 
 	@RequestMapping("/fileDelete.do")
 	public String deleteFile(@RequestParam("fno") int fno, @RequestParam("id") int id, Model model) {
 		fileService.deletefile(fno);
 		model.addAttribute("id", id);
-		return "updatefile.do";
+		return "redirect:updatefile.do";
 	}
 
 }

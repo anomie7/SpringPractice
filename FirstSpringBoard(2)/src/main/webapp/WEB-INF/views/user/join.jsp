@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@include file="commons/top.jsp" %>
+<%@include file="../commons/top.jsp" %>
 <script>
 function joinCheck(f){
 	if(f.id.value == ''){
@@ -22,7 +22,7 @@ function joinCheck(f){
 </style>
 </head>
 <body>
-    <%@include file="commons/navbar.jsp" %>
+    <%@include file="../commons/navbar.jsp" %>
     <div class="container">
         <div class="col-md-4 col-md-offset-3">
             <c:choose>

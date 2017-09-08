@@ -1,6 +1,6 @@
 package com.SpringBoard.exceptions;
 
-public class IdNotMatchException extends Exception {
+public class IdNotMatchException extends LoginException {
 	/**
 	 * 
 	 */

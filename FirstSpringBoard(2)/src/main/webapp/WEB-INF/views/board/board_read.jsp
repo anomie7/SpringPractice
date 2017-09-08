@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<%@include file="commons/top.jsp" %>
+<%@include file="../commons/top.jsp" %>
     <style>
     	pre {border: 0; background-color: transparent;}
     	
@@ -13,7 +13,7 @@
 		function deleteChk(){
 			var isdel = confirm("정말 삭제하시겠어요?");
 			if(isdel == true){
-				location.href = "deletefile.do?id=${board.id}";
+				location.href = "deleteBoard.do?id=${board.id}";
 			}
 		}
 		
@@ -100,7 +100,7 @@
 	</script>
 </head>
 <body>
-    <%@include file="commons/navbar.jsp" %>
+    <%@include file="../commons/navbar.jsp" %>
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
             <div style="padding-bottom: 30px;">
@@ -118,18 +118,14 @@
                     <td>${board.regdate}</td>
                 </tr>
                 <tr>
-                	<th>첨부파일</th>
-                	<td colspan="3"><a href="downloadFile.do?id=${board.id}">${file.originalFileName}</a></td>
-                </tr>
-                <tr>
                     <th>내용</th>
                     <td colspan="3"><pre><code>${board.content}</code></pre></td>
                 </tr>
             </table>
             <span class="btn-group col-xs-offset-9">
-                    <a href="getFileList.do?nowpage=${nowpage}" class="btn btn-default">목록</a>
+                    <a href="getList.do?nowpage=${nowpage}" class="btn btn-default">목록</a>
                     <c:if test="${board.name eq sessionScope.id}">
-                    <a href="updatefile.do?id=${board.id}" class="btn btn-default">수정</a>
+                    <a href="boardUpdate.do?id=${board.id}" class="btn btn-default">수정</a>
                     <a class="btn btn-default" href="javascript:deleteChk()">삭제</a>
                     </c:if>
                 </span>
