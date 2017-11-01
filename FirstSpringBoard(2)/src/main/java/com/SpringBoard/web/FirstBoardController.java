@@ -68,5 +68,12 @@ public class FirstBoardController {
 		boardService.modifyBoard(vo);
 		return "redirect:/getList.do";
 	}
+	
+	@RequestMapping("/editor.do")
+	public String getEditor(){
+		return "board/board_write";
+	}
+	
+	
 
 }

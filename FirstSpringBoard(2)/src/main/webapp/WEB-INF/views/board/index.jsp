@@ -37,7 +37,7 @@
 			</table>
 			<div class="btn-group col-md-offset-10">
 			<c:if test="${not empty sessionScope.id}">
-			<a href="board_write.jsp" class="btn btn-default">글쓰기</a>
+			<a href="editor.do" class="btn btn-default">글쓰기</a>
 			</c:if>
 			</div>
 		</div>

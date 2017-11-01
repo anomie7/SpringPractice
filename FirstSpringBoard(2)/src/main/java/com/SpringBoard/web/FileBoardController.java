@@ -110,5 +110,10 @@ public class FileBoardController {
 		model.addAttribute("id", id);
 		return "redirect:updatefile.do";
 	}
+	
+	@RequestMapping("/fileEditor.do")
+	public String getEditor(){
+		return "file/board_fileWrite";
+	}
 
 }
